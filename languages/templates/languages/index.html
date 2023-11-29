@@ -1,0 +1,76 @@
+{% extends 'languages/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" xmlns="">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <style>
+        #slideShow {
+            max-width: 50%;
+            max-height: 50%;
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+    <script type="text/javascript">
+        const allImages = [
+            "{% static 'image/Python.png' %}",
+            "{% static 'image/C++.png' %}",
+            "{% static 'image/PHP.png' %}",
+            "{% static 'image/JavaScript.png' %}"
+        ];
+        let imgNum = 0;
+        const imgLength = allImages.length - 1;
+        const delay = 5000; // увеличенный интервал
+        let run;
+
+        function chgImg(direction) {
+            imgNum += direction;
+            if (imgNum > imgLength) {
+                imgNum = 0;
+            }
+            if (imgNum < 0) {
+                imgNum = imgLength;
+            }
+            const slideShow = document.getElementById('slideShow');
+            slideShow.style.opacity = 0;
+            setTimeout(() => {
+                slideShow.src = allImages[imgNum];
+                slideShow.style.opacity = 1;
+            }, 1000); // добавлен таймаут для плавного перехода
+        }
+
+        function auto() {
+            if (run) {
+                clearInterval(run);
+                run = null;
+            } else {
+                run = setInterval(() => chgImg(1), delay);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="margin: 0 auto; text-align: center;">
+        <img src="{% static 'image/Python.png' %}" id="slideShow" alt="Slide Show">
+        <br>
+        <button onclick="chgImg(-1)">Предыдущая</button>
+        <button onclick="auto()">Старт/Стоп</button>
+        <button onclick="chgImg(1)">Следующая</button>
+    </div>
+    <script type="text/javascript">
+        auto();
+    </script>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>
+{% endblock content %}
+
+<footer>
+    <p>&copy; 2023 Your Website Name</p>
+</footer>

@@ -1,0 +1,38 @@
+{% extends 'languages/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="css_styles/login.css">
+</head>
+<body>
+<header class="logo">
+  <img src="image/logo.png">
+  <div class="margin-left">
+      <strong class="beautiful-button" onclick="handleButtonClick(1)">Engineering manager</strong>
+      <strong class="beautiful-button" onclick="handleButtonClick(2)">Languages</strong>
+      <strong class="beautiful-button">Login</strong>
+      <strong class="beautiful-button">Register</strong>
+  </div>
+</header>
+{% block content %}
+{% if form.errors %}
+<p>Your username and password didn't match. Pleasy try again.</p>
+{% endif %}
+
+    <div class="login-container">
+        <div class="login pale-green" id="loginBlock">
+            <h2>Login</h2>
+            <p>Log in to your account and explore our platform!</p>
+            <form method="post" action="{% url 'users:login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+                <input type="hidden" name="next" value="{% url 'languages:index' %}" />
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+</body>
+</html>

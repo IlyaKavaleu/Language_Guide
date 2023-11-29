@@ -1,0 +1,28 @@
+body {
+    background-color: black;
+    color: white;
+    margin: 0;
+}
+
+
+@keyframes changeBackground {
+    0% { background-color: pink; }
+    25% { background-color: blue; }
+    50% { background-color: pink; }
+    75% { background-color: blue; }
+    100% { background-image: pink; }
+}
+
+
+body {
+    animation: changeBackground 60s infinite; /* Задайте время анимации и количество картинок */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}

@@ -1,0 +1,127 @@
+/* ALL FOR TAG <--BODY--> */
+/* Добавленные стили к body с исключением nav и footer */
+body {
+    margin: 0;
+    background-color: #ffc0cb;
+    height: 100vh;
+}
+
+/* Стили для контейнера с цветом фона и анимацией */
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffc0cb;
+    opacity: 0; /* Начальная непрозрачность */
+    transform: scale(0.8); /* Начальный размер */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Плавное изменение */
+}
+
+/* Показывать контейнер после добавления класса .show */
+.content-container.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+
+/* ALL FOR TAG <--CONTAINER--> */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: pink;
+    opacity: 1;
+    animation: fadeIn 0.5s ease-out;
+    height: 100vh; /* Занимать 100% высоты экрана */
+    width: 80vh;
+    margin-top: 600px; /* Выравнивание по горизонтали */
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+/* ALL FOR TAG BLOCK */
+.block-category {
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    margin-top: -460px; /* Уменьшено значение отступа для более компактного вида */
+    margin-right: 30px; /* Отступ между блоками */
+    margin-bottom: 20px; /* Отступ между блоками и кнопками */
+    background-color: yellow;
+    border-radius: 10px; /* Закругление углов для более мягкого внешнего вида */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для подчеркивания блока */
+    transition: transform 0.3s ease-in-out; /* Плавное изменение размера при наведении */
+}
+
+.block-category:hover {
+    transform: scale(1.1); /* Увеличение размера при наведении */
+}
+
+.block-category img {
+    width: 70px;
+    height: 70px;
+}
+
+
+
+/* ALL FOR BLOCK BUTTON */
+/* Стили для кнопок */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    margin-top: -250px;
+    right: 20px; /* Отступ справа */
+    transform: translateY(-50%);
+}
+
+.button {
+    background-color: #ff6347; /* Цвет кнопки */
+    color: #fff; /* Цвет текста на кнопке */
+    padding: 10px; /* Внутренние отступы кнопки */
+    border: none; /* Убираем границу кнопки */
+    border-radius: 5px; /* Закругляем углы кнопки */
+    margin-bottom: 10px; /* Отступ между кнопками */
+    cursor: pointer; /* Изменение курсора при наведении */
+    transition: background 0.3s ease; /* Плавное изменение цвета фона при наведении */
+}
+
+.button:hover {
+    background-color: #d9534f; /* Изменяем цвет фона при наведении */
+}
+
+/* Анимация огня на кнопках */
+@keyframes fireAnimation {
+    0% {
+        box-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+    }
+    50% {
+        box-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347, inset 0 0 10px #ff6347, inset 0 0 20px #ff6347, inset 0 0 30px #ff6347;
+    }
+    100% {
+        box-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+    }
+}
+
+.fire {
+    animation: fireAnimation 1s infinite;
+}
+
+/* Применяем стили к кнопкам */
+.button.fire {
+    animation: fireAnimation 1s infinite;
+}

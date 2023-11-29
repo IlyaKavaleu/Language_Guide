@@ -1,0 +1,18 @@
+{% extends 'languages/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% block content %}
+<body>
+    {{ category.name }}
+    <form action="{% url 'languages:edit_category' category.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button class="button">Save</button>
+    </form>
+</body>
+{% endblock content %}
+</html>

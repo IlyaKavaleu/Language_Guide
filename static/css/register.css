@@ -1,0 +1,90 @@
+.registration-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .registration {
+    position: relative;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, filter 0.3s ease, background-color 0.3s ease;
+    display: inline-block;
+    vertical-align: top;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+  .registration h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #000;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .registration p {
+    font-size: 16px;
+    color: #000;
+    transition: color 0.3s ease;
+  }
+
+  .registration form {
+    margin-top: 20px;
+  }
+
+  .registration input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .registration button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .registration:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+    background-color: #ff4d4d;
+  }
+
+  .registration:hover h2,
+  .registration:hover p {
+    color: #fff;
+  }
+
+.registration::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    z-index: -1;
+    transition: transform 0.3s ease, filter 0.3s ease, background-color 0.3s ease;
+}
+
+  .registration:hover::before {
+    opacity: 1;
+  }
+
+  .registration {
+    transform-origin: center center;
+    backface-visibility: hidden;
+  }
+

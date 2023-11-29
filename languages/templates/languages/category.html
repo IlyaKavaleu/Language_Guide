@@ -1,0 +1,31 @@
+{% extends 'languages/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category.name }} Languages</title>
+</head>
+{% block content %}
+<body>
+    <p>Category: {{ category.name }}</p>
+    <li><img src="{{ category.image.url }}" alt="{{ category.title }}" width="150px" height="150px"></li>
+
+    <ul>
+        {% for language in languages %}
+            <li><a href="{% url 'languages:language' category.id language.id %}">{{ language.name }}</a></li>
+            {% if category.image %}
+                <li><img src="{{ language.image.url }}" alt="{{ language.title }}" width="50px" height="50px"></li>
+            {% else %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <div>
+        <a href="{% url 'languages:categories' %}">Back to Categories</a>
+        <h3><a href="{% url 'languages:new_language' category.id %}">Add a New Language</a></h3>
+        <h3><a href="{% url 'languages:edit_category' category.id %}">Edit your category</a></h3>
+        <h3><a href="{% url 'languages:delete_category' category.id %}">Delete your category</a></h3>
+    </div>
+</body>
+{% endblock content %}
+
+</html>

@@ -1,0 +1,20 @@
+{% extends 'languages/base.html' %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% block content %}
+<body>
+    <h1>{{ category }}</h1>
+    <p>Add category</p>
+    <form action="{% url 'languages:new_category' %}" method="post" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-primary">Add category</button>
+    </form>
+</body>
+{% endblock content %}
+</html>

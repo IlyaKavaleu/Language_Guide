@@ -1,0 +1,35 @@
+{% extends 'languages/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% block content %}
+<body>
+  {{ language.name }}<br>
+  {{ language.description }}
+  {% if language.image %}
+    <li><img src="{{ language.image.url }}" alt="{{ language.title }}" width="50px" height="50px"></li>
+  {% else %}
+    <li>No image available</li>
+  {% endif %}
+    <a href="{% url 'languages:edit_language' language.id %}">Edit language</a>
+    <a href="{% url 'languages:delete_language' language.id %}">Delete language</a>
+  {% for comment in comments %}
+    <h4>{{ comment }}</h4>
+  {% endfor %}
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h2>Add comment</h2>
+    <form action="{% url 'comments:add_comment_to_language' language.id %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+  </form>
+</body>
+{% endblock content %}

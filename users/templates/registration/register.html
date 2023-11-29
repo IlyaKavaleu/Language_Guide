@@ -1,0 +1,44 @@
+{% extends 'languages/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="css_styles/styles_main.css">
+    <link rel="stylesheet" href="css_styles/nav.css">
+    <link rel="stylesheet" href="css_styles/register.css">
+</head>
+<body>
+<header class="logo">
+  <img src="image/logo.png">
+  <div class="margin-left">
+      <strong class="beautiful-button" onclick="handleButtonClick(1)">Engineering manager</strong>
+      <strong class="beautiful-button" onclick="handleButtonClick(2)">Languages</strong>
+      <strong class="beautiful-button">Login</strong>
+      <strong class="beautiful-button">Register</strong>
+  </div>
+</header>
+
+{% block content %}
+<center>
+  <div class="registration-container">
+    <div class="registration pale-blue" id="registrationBlock">
+      <h2>Register Now</h2>
+      <p>Create an account and start exploring our platform!</p>
+
+      <form action="{% url 'users:register' %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+<!--        <input type="text" name="username" placeholder="Username" required>-->
+<!--        <input type="email" name="email" placeholder="Email" required>-->
+<!--        <input type="password" name="password" placeholder="Password" required>-->
+<!--        <input type="text" name="name" placeholder="Name" required>-->
+<!--        <input type="number" name="age" placeholder="Age" required>-->
+
+        <button type="submit">Register</button>
+          <input type="hidden" name="next" value="{% url 'languages:index' %}" />
+      </form>
+    </div>
+  </div>
+</center>
+{% endblock content %}
