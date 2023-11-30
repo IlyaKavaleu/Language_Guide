@@ -14,4 +14,4 @@ class Comments(models.Model):
         verbose_name_plural = 'Comments'
 
     def __str__(self):
-        return f'{self.user}____{self.text}'
+        return f'user [{self.user}] - {self.text}'

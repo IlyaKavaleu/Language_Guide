@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.views import View
 
 from comments.models import Comments
 from languages import forms
@@ -80,18 +81,21 @@ def language(request, language_id, category_id):
     language = Language.objects.get(id=language_id)
     category = language.category.id
     comments = Comments.objects.filter(language=language)
-    context = {'language': language, 'category': category, 'comments':comments}
+    context = {'language': language, 'category': category, 'comments': comments}
     return render(request, 'languages/language.html', context)
+
 
 def delete_category(request, category_id):
     category = Category.objects.get(id=category_id)
     category.delete()
     return redirect('languages:categories')
 
+
 def delete_language(request, language_id):
     language = Language.objects.get(id=language_id)
     language.delete()
     return redirect('languages:category', id=language.category.id)
+
 
 def delete_all_categories(request):
     categories = Category.objects.all()
@@ -103,3 +107,15 @@ def delete_all_languages(request, category_id):
     languages = Category.objects.all()
     languages.delete()
     return redirect('languages:categories', id=category.id)
+
+
+def delete_with_choose_category(request):
+    template_name = 'languages/categories.html'
+    category_id = request.POST.get('category_id')
+    try:
+        category = Category.objects.get(pk=category_id)
+        category.delete()
+    except Category.DoesNotExists:
+        pass
+    return redirect('languages:categories')
+

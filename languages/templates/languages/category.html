@@ -7,24 +7,31 @@
 </head>
 {% block content %}
 <body>
-    <p>Category: {{ category.name }}</p>
-    <li><img src="{{ category.image.url }}" alt="{{ category.title }}" width="150px" height="150px"></li>
+<div style="text-align: center;">
 
-    <ul>
+    <div id="caption" style="font-size: 38px; font-family: 'Source Code Pro', monospace; text-shadow: 10px 10px 10px black; margin-bottom: 20px; margin-top:20px;">
+        Добро пожаловать в базовый курс такого замечательного языка как {{ category.name }}
+    </div>
+    <img src="{{ category.image.url }}" alt="{{ category.title }}" width="250px" height="250px">
+    <br>
+    <br>
         {% for language in languages %}
-            <li><a href="{% url 'languages:language' category.id language.id %}">{{ language.name }}</a></li>
+            <a href="{% url 'languages:language' category.id language.id %}">{{ language.name }}</a>
             {% if category.image %}
-                <li><img src="{{ language.image.url }}" alt="{{ language.title }}" width="50px" height="50px"></li>
+                <img src="{{ language.image.url }}" alt="{{ language.title }}" width="50px" height="50px">
             {% else %}
             {% endif %}
         {% endfor %}
-    </ul>
+    <br>
+    <br>
+    <br>
     <div>
         <a href="{% url 'languages:categories' %}">Back to Categories</a>
         <h3><a href="{% url 'languages:new_language' category.id %}">Add a New Language</a></h3>
         <h3><a href="{% url 'languages:edit_category' category.id %}">Edit your category</a></h3>
         <h3><a href="{% url 'languages:delete_category' category.id %}">Delete your category</a></h3>
     </div>
+</div>
 </body>
 {% endblock content %}
 
