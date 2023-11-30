@@ -1,36 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Автоматическая смена картинок</title>
-  <style>
-    #imageContainer {
-      width: 300px; /* Задайте ширину и высоту, соответствующую вашим картинкам */
-      height: 200px;
-      overflow: hidden;
-    }
-  </style>
-</head>
-<body>
 
-<div id="imageContainer">
-  <img src="{% static 'image/Python.jpg' %}" alt="Картинка 1" id="image">
+<div class="bulletsBlock">
+    <div class="bullet-item">
+        <span class="iconBullet fa fa-cog"></span>
+        <p class="titleBullet">Выгода 1</p>
+        <p class="hideText">Дополнительный<br>скрытый текст 1</p>
+    </div>
+ 
+    <div class="bullet-item">
+        <!-- Содержимое 2-го блока -->
+    </div>
+ 
+    <div class="bullet-item">
+        <!-- Содержимое 3-го блока -->
+    </div>
 </div>
-
-<script>
-  let currentImageIndex = 1;
-  const imageElement = document.getElementById('image');
-  const imageNames = ['С++.png', 'Python.png', 'PHP.png']; // Добавьте нужные имена файлов
-
-  function changeImage() {
-    currentImageIndex = (currentImageIndex % imageNames.length) + 1;
-    imageElement.src = imageNames[currentImageIndex - 1];
-  }
-
-  // Задайте интервал смены картинок (в миллисекундах)
-  setInterval(changeImage, 3000); // Например, каждые 3 секунды
-</script>
-
-</body>
-</html>

@@ -2,37 +2,64 @@
 {% load static %}
 {% block content %}
 
+<style>
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .block {
+        border: 2px solid black;
+        padding: 10px;
+        margin: 5px;
+        background-color: white;
+        text-align: center;
+        flex: 0 0 calc(30% - 10px); /* Adjusted size to 30% with smaller margins and padding */
+        box-sizing: border-box;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+
+    .button {
+        text-decoration: none;
+        color: black;
+        padding: 10px 20px;
+        border: 2px solid black;
+        border-radius: 5px;
+    }
+
+    .content-container {
+        background-color: white;
+    }
+</style>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
         $('.content-container').addClass('show');
     });
 </script>
-
-<!DOCTYPE html>
-<html lang="en" xmlns="">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ category.name }} Languages</title>
-    <link rel="stylesheet" href="{% static 'css/categories.css' %}">
-</head>
-<body style="background-color: white;">
-<div class="content-container" style="background-color: white;">
-    <div class="container" style="background-color: white;">
-        <div class="button-container">
-            <div class="button">
-                <a href="{% url 'languages:new_category' %}">New category</a>
-            </div>
-            <div class="button">
-                <a href="{% url 'languages:delete_all_categories' %}">Delete all category</a>
-            </div>
-        </div>
+<h1 style="text-align: center;">
+    <div id="caption" style="font-size: 38px; font-family: 'Source Code Pro', monospace; text-shadow: 10px 10px 10px black;">
+        Choose category and start learn programming!
+    </div>
+</h1>
+<div class="content-container">
+    <div class="container">
         {% for category in categories %}
-            <div class="block-category">
-                <a href="{% url 'languages:category' category.id %}">
+            <div class="block">
+                <a href="{% url 'languages:category' category.id %}" class="button">
                     <h3>{{ category.name }}</h3>
                     {% if category.image %}
-                        <img src="{{ category.image.url }}" alt="{{ category.title }}" width="50px" height="50px">
+                        <img src="{{ category.image.url }}" alt="{{ category.title }}" width="100px" height="100px">
                     {% else %}
                         No image available
                     {% endif %}
@@ -40,7 +67,25 @@
             </div>
         {% endfor %}
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
-</body>
+
 {% endblock content %}
-</html>

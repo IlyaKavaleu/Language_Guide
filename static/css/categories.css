@@ -1,135 +1,33 @@
-body {
-    background-image: url('{% static 'image/main_page.png' %}');
-    background-size: cover;
+/* Общий стиль блока */
+.block {
+  background-color: #333; /* Темно-серый цвет фона */
+  color: #fff; /* Белый цвет текста */
+  padding: 20px; /* Поля внутри блока */
+  border-radius: 10px; /* Закругленные углы */
+  margin-bottom: 20px; /* Отступ снизу между блоками */
 }
 
-/* ALL FOR TAG <--BODY--> */
-/* Добавленные стили к body с исключением nav и footer */
-/* Стили для контейнера с цветом фона и анимацией */
-.content-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    height: 100vh;;
-    opacity: 0; /* Начальная непрозрачность */
-    transform: scale(0.8); /* Начальный размер */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Плавное изменение */
+/* Стиль заголовка внутри блока */
+.block h2 {
+  color: #ffd700; /* Желтый цвет для заголовка */
 }
 
-/* Показывать контейнер после добавления класса .show */
-.content-container.show {
-    opacity: 1;
-    transform: scale(1);
+/* Стиль для ссылок внутри блока */
+.block a {
+  color: #00f; /* Синий цвет для ссылок */
 }
 
-
-
-/* ALL FOR TAG <--CONTAINER--> */
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    animation: fadeIn 0.5s ease-out;
-    height: 100vh; /* Занимать 100% высоты экрана */
-    width: 80vh;
-    margin-top: 600px; /* Выравнивание по горизонтали */
+/* Дополнительный стиль для кнопок внутри блока */
+.block button {
+  background-color: #ff4500; /* Оранжевый цвет для кнопок */
+  color: #fff; /* Белый цвет текста кнопок */
+  padding: 10px 20px; /* Поля внутри кнопок */
+  border: none; /* Убираем границу у кнопок */
+  border-radius: 5px; /* Закругленные углы у кнопок */
+  cursor: pointer; /* Изменение курсора при наведении на кнопку */
 }
 
-/* Анимация появления */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+/* Изменение стиля кнопки при наведении */
+.block button:hover {
+  background-color: #ff6347; /* Более светлый оранжевый цвет при наведении */
 }
-
-
-/* ALL FOR TAG BLOCK */
-.block-category {
-    height: 150px;
-    width: 150px;
-    text-align: center;
-    margin-top: -460px; /* Уменьшено значение отступа для более компактного вида */
-    margin-right: 30px; /* Отступ между блоками */
-    margin-bottom: 20px; /* Отступ между блоками и кнопками */
-    border-radius: 10px; /* Закругление углов для более мягкого внешнего вида */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для подчеркивания блока */
-    transition: transform 0.3s ease-in-out; /* Плавное изменение размера при наведении */
-}
-
-.block-category:hover {
-    transform: scale(1.1); /* Увеличение размера при наведении */
-}
-
-.block-category img {
-    width: 70px;
-    height: 70px;
-}
-
-
-
-/* ALL FOR BLOCK BUTTON */
-/* Стили для кнопок */
-.button-container {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 50%;
-    margin-top: -250px;
-    right: 20px; /* Отступ справа */
-    transform: translateY(-50%);
-}
-
-.button {
-    background-color: #ff6347; /* Цвет кнопки */
-    color: #fff; /* Цвет текста на кнопке */
-    padding: 10px; /* Внутренние отступы кнопки */
-    border: none; /* Убираем границу кнопки */
-    border-radius: 5px; /* Закругляем углы кнопки */
-    margin-bottom: 10px; /* Отступ между кнопками */
-    cursor: pointer; /* Изменение курсора при наведении */
-    transition: background 0.3s ease; /* Плавное изменение цвета фона при наведении */
-}
-
-.button:hover {
-    background-color: #d9534f; /* Изменяем цвет фона при наведении */
-}
-
-/* Анимация огня на кнопках */
-@keyframes fireAnimation {
-    0% {
-        box-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
-    }
-    50% {
-        box-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347, inset 0 0 10px #ff6347, inset 0 0 20px #ff6347, inset 0 0 30px #ff6347;
-    }
-    100% {
-        box-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
-    }
-}
-
-.fire {
-    animation: fireAnimation 1s infinite;
-}
-
-/* Применяем стили к кнопкам */
-.button.fire {
-    animation: fireAnimation 1s infinite;
-}
-
-
-
-
-
-
-
-
-
-
-
-
