@@ -110,12 +110,12 @@ def delete_all_languages(request, category_id):
 
 
 def delete_with_choose_category(request):
-    template_name = 'languages/categories.html'
-    category_id = request.POST.get('category_id')
+    template_name = 'languages/categories.html'  # Замените на ваш шаблон
+    model = Category  # Замените на вашу модель данных
+    category_id = request.POST.get('category_id')  # Получаем ID категории из формы
     try:
-        category = Category.objects.get(pk=category_id)
-        category.delete()
-    except Category.DoesNotExists:
-        pass
+        category = model.objects.get(pk=category_id)
+        category.delete()  # Удаляем категорию из базы данных
+    except model.DoesNotExist:
+        pass  # Обработка случая, когда категория не найдена
     return redirect('languages:categories')
-

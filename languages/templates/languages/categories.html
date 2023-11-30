@@ -126,14 +126,12 @@
     </div>
     <div class="button-container">
         <img src="{% static 'image/sett.png' %}" title="Settings" onclick="openModal()">
-
-
         <div class="button" onclick="openModal()">Delete Category</div>
         <!-- Модальное окно -->
         <div class="modal" id="deleteModal" style="font-size: 38px; font-family: 'Source Code Pro', monospace; text-shadow: 10px 10px 10px black;">
             <h2>Delete Category</h2>
             <p>Choose the category you want to delete:</p>
-            <form method="post" action="{% url 'languages:delete_category' %}">
+            <form method="post" action="{% url 'languages:delete_with_choose_category' %}">
                 {% csrf_token %}
                 <select name="category_id" id="categorySelect">
                     <!-- Здесь вы можете добавить опции для каждой категории -->
@@ -141,9 +139,20 @@
                         <option value="{{ category.id }}">{{ category.name }}</option>
                     {% endfor %}
                 </select>
-                <button type="submit">Delete</button>
+                <!-- Добавляем скрытое поле для передачи выбранной категории -->
+                <input type="hidden" name="selected_category_id" id="selectedCategoryId">
+                <button type="submit" onclick="setSelectedCategoryId()">Delete</button>
                 <button type="button" onclick="closeModal()">Cancel</button>
             </form>
+
+            <script>
+                function setSelectedCategoryId() {
+                    // Получаем выбранное значение из списка и устанавливаем его в скрытое поле
+                    var selectedCategoryId = document.getElementById('categorySelect').value;
+                    document.getElementById('selectedCategoryId').value = selectedCategoryId;
+                }
+            </script>
+
         </div>
 
 
@@ -171,6 +180,16 @@
             </div>
         {% endfor %}
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
-
 {% endblock content %}
