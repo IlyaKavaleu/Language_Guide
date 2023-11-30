@@ -1,4 +1,4 @@
-'{% extends 'languages/base.html' %}
+{% extends 'languages/base.html' %}
 {% load static %}
 {% block content %}
 
@@ -16,33 +16,31 @@
     <title>{{ category.name }} Languages</title>
     <link rel="stylesheet" href="{% static 'css/categories.css' %}">
 </head>
-<body>
- <div class="body">
-     <div class="content-container">
-            <div class="container">
-                <div class="button-container">
-                    <div class="button">
-                        <a href="{% url 'languages:new_category' %}">New category</a>
-                    </div>
-                    <div class="button">
-                        <a href="{% url 'languages:delete_all_categories' %}">Delete all category</a>
-                    </div>
-                </div>
-                {% for category in categories %}
-                    <div class="block-category">
-                        <a href="{% url 'languages:category' category.id %}">
-                            <h3>{{ category.name }}</h3>
-                                {% if category.image %}
-                                    <img src="{{ category.image.url }}" alt="{{ category.title }}" width="50px" height="50px">
-                                {% else %}
-                                    No image available
-                                {% endif %}
-                        </a>
-                    </div>
-                {% endfor %}
+<body style="background-color: white;">
+<div class="content-container" style="background-color: white;">
+    <div class="container" style="background-color: white;">
+        <div class="button-container">
+            <div class="button">
+                <a href="{% url 'languages:new_category' %}">New category</a>
             </div>
-     </div>
+            <div class="button">
+                <a href="{% url 'languages:delete_all_categories' %}">Delete all category</a>
+            </div>
+        </div>
+        {% for category in categories %}
+            <div class="block-category">
+                <a href="{% url 'languages:category' category.id %}">
+                    <h3>{{ category.name }}</h3>
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}" alt="{{ category.title }}" width="50px" height="50px">
+                    {% else %}
+                        No image available
+                    {% endif %}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 </div>
-{% endblock content %}
 </body>
+{% endblock content %}
 </html>

@@ -6,16 +6,16 @@ body {
 
 
 @keyframes changeBackground {
-    0% { background-color: pink; }
-    25% { background-color: blue; }
-    50% { background-color: pink; }
-    75% { background-color: blue; }
-    100% { background-image: pink; }
+    0% { background-color: dark; }
+    25% { background-color: orange; }
+    50% { background-color: dark; }
+    75% { background-color: orange; }
+    100% { background-image: dark; }
 }
 
 
 body {
-    animation: changeBackground 60s infinite; /* Задайте время анимации и количество картинок */
+    animation: changeBackground 20s infinite; /* Задайте время анимации и количество картинок */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -25,4 +25,31 @@ footer {
     background-color: #333;
     color: white;
     padding: 10px;
+}
+
+
+/* ALL FOR CAPTION */
+.caption-container {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+    position: relative;
+}
+
+
+@keyframes blinkAndScale {
+  0%, 100% {
+    transform: scale(1); /* начальный и конечный размер текста */
+    color: black; /* начальный цвет текста */
+    font: bold;
+  }
+  50% {
+    transform: scale(1.1); /* промежуточный размер текста */
+    color: yellow; /* промежуточный цвет текста */
+    font: bold;
+  }
+}
+
+.blinking-text {
+  animation: blinkAndScale 3s infinite; /* 2s - время одного цикла анимации, infinite - бесконечное повторение */
 }

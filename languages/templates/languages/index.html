@@ -2,28 +2,58 @@
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
-<html lang="en" xmlns="">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link href="https://fonts.cdnfonts.com/css/robot" rel="stylesheet">
     <style>
+        @import url('https://fonts.cdnfonts.com/css/robot');
         #slideShow {
-            max-width: 50%;
-            max-height: 50%;
+            max-width: 600px;
+            max-height: 600px;
             transition: opacity 1s ease-in-out;
+
+        .caption-container {
+            text-align: center;
+            margin-top: 10px;
+            position: relative;
+            background-color: yellow;
+        }
+
+        .caption {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+            background-color: #3498db; /* Цвет фона */
+            color: #fff; /* Цвет текста */
+            padding: 10px 20px; /* Внутренние отступы */
+            border-radius: 5px; /* Скругление углов */
+            font-size: 30px;
+        }
+
+        .caption-container:hover #caption {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
     <script type="text/javascript">
         const allImages = [
-            "{% static 'image/Python.png' %}",
-            "{% static 'image/C++.png' %}",
-            "{% static 'image/PHP.png' %}",
-            "{% static 'image/JavaScript.png' %}"
+            { src: "{% static 'image/Python.png' %}", caption: 'Ты изучишь основы самого популярного языка в мире!', width: 450, height: 450 },
+            { src: "{% static 'image/SQL.png' %}", caption: 'Освоишь в совершенстве базы данных!', width: 450, height: 450 },
+            { src: "{% static 'image/GOLang.png' %}", caption: 'После изучения Python сделаешь следующий шаг вместе с GOLang!', width: 450, height: 450 },
+            { src: "{% static 'image/RubyLanguage.png' %}", caption: 'Будешь разрабатывать крутые веб-приложения!', width: 450, height: 450 },
+            { src: "{% static 'image/JavaLanguage.png' %}", caption: 'Научишься писать промышленные программы, а также программы под Android!', width: 450, height: 450 },
+            { src: "{% static 'image/C++.png' %}", caption: 'Сделаешь первые шаги к разработке игр!', width: 450, height: 450 },
+            { src: "{% static 'image/PHP.png' %}", caption: 'Познакомишься с внутренней кухней легендарного языка!', width: 450, height: 450 },
+            { src: "{% static 'image/JS.png' %}", caption: 'Станешь востребованным фронтендером!', width: 450, height: 450 },
         ];
+
         let imgNum = 0;
         const imgLength = allImages.length - 1;
-        const delay = 5000; // увеличенный интервал
+        const delay = 5000;
         let run;
 
         function chgImg(direction) {
@@ -35,11 +65,15 @@
                 imgNum = imgLength;
             }
             const slideShow = document.getElementById('slideShow');
+            const caption = document.getElementById('caption');
             slideShow.style.opacity = 0;
             setTimeout(() => {
-                slideShow.src = allImages[imgNum];
+                slideShow.src = allImages[imgNum].src;
+                slideShow.style.width = `${allImages[imgNum].width}px`;
+                slideShow.style.height = `${allImages[imgNum].height}px`;
+                caption.innerText = allImages[imgNum].caption;
                 slideShow.style.opacity = 1;
-            }, 1000); // добавлен таймаут для плавного перехода
+            }, 1000);
         }
 
         function auto() {
@@ -53,21 +87,25 @@
     </script>
 </head>
 <body>
-    <div style="margin: 0 auto; text-align: center;">
+    <div style="margin-top: 30px; margin-right: 50px; text-align: right;">
         <img src="{% static 'image/Python.png' %}" id="slideShow" alt="Slide Show">
-        <br>
-        <button onclick="chgImg(-1)">Предыдущая</button>
-        <button onclick="auto()">Старт/Стоп</button>
-        <button onclick="chgImg(1)">Следующая</button>
+        <div class="blinking-text" style="text-align: right; margin-right: 70px;">
+            <div id="caption" style="font-size: 38px; font-family: 'Source Code Pro', monospace; text-shadow: 10px 10px 10px black;">
+                Ты изучешь основы самого популярного языка в мире - Python!
+            </div>
+        </div>
     </div>
+
+
     <script type="text/javascript">
         auto();
     </script>
-<br>
-<br>
-<br>
-<br>
-</body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- Закрываем div -->
+    </body>
 </html>
 {% endblock content %}
 
