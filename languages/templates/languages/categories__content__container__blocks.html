@@ -1,0 +1,27 @@
+<div class="content-container">
+    <div class="container">
+        {% for category in categories %}
+            <div class="block">
+                <a href="{% url 'languages:category' category.id %}" class="button">
+                    <h3>{{ category.name }}</h3>
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}" alt="{{ category.title }}" width="100px" height="100px">
+                    {% else %}
+                        No image available
+                    {% endif %}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>

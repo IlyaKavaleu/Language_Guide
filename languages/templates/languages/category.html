@@ -1,38 +1,66 @@
 {% extends 'languages/base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ category.name }} Languages</title>
 </head>
-{% block content %}
-<body>
-<div style="text-align: center;">
 
-    <div id="caption" style="font-size: 38px; font-family: 'Source Code Pro', monospace; text-shadow: 10px 10px 10px black; margin-bottom: 20px; margin-top:20px;">
-        Добро пожаловать в базовый курс такого замечательного языка как {{ category.name }}!
-    </div>
-    <img src="{{ category.image.url }}" alt="{{ category.title }}" width="250px" height="250px">
-    <br>
-    <br>
+{% block content %}
+<style>
+        .btn-container {
+            width: 250px;
+            height: 250px;
+            animation: shake 6s infinite; /* 2.5s дрожания + 3s пауза = 5.5s цикл, 6s для возможности отображения начального состояния */
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0) rotate(0) scale(1);
+            }
+            25% {
+                transform: translateX(-5px) rotate(-5deg) scale(1.1);
+            }
+            50% {
+                transform: translateX(5px) rotate(5deg) scale(0.9);
+            }
+            75% {
+                transform: translateX(-5px) rotate(-5deg) scale(1.1);
+            }
+        }
+
+
+</style>
+<body>
+    <div style="text-align: center;">
+        <div id="caption" style="font-size: 38px; font-family: 'Source Code Pro', monospace; text-shadow: 10px 10px 10px black; margin-bottom: 20px; margin-top:20px;">
+            Добро пожаловать в базовый курс такого замечательного языка как {{ category.name }}!
+        </div>
+        <img class="btn-container" src="{{ category.image.url }}" alt="{{ category.title }}">
+        <br>
+        <br>
         {% for language in languages %}
-            <a href="{% url 'languages:language' category.id language.id %}">{{ language.name }}</a>
-            {% if category.image %}
-                <img src="{{ language.image.url }}" alt="{{ language.title }}" width="50px" height="50px">
-            {% else %}
-            {% endif %}
+        <a href="{% url 'languages:language' category.id language.id %}">{{ language.name }}</a>
+        {% if category.image %}
+        <img src="{{ language.image.url }}" alt="{{ language.title }}" width="50px" height="50px">
+        {% else %}
+        {% endif %}
         {% endfor %}
-    <br>
-    <br>
-    <br>
-    <div>
-        <a href="{% url 'languages:categories' %}">Back to Categories</a>
-        <h3><a href="{% url 'languages:new_language' category.id %}">Add a New Language</a></h3>
-        <h3><a href="{% url 'languages:edit_category' category.id %}">Edit your category</a></h3>
-        <h3><a href="{% url 'languages:delete_category' category.id %}">Delete your category</a></h3>
+        <br>
+        <br>
+        <br>
+        <div>
+            <a href="{% url 'languages:categories' %}">Back to Categories</a>
+            <h3><a href="{% url 'languages:new_language' category.id %}">Add a New Language</a></h3>
+            <h3><a href="{% url 'languages:edit_category' category.id %}">Edit your category</a></h3>
+            <h3><a href="{% url 'languages:delete_category' category.id %}">Delete your category</a></h3>
+        </div>
     </div>
-</div>
 </body>
+
 {% endblock content %}
 
 </html>

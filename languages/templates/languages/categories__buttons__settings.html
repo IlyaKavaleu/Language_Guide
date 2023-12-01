@@ -1,0 +1,27 @@
+{% load static %}
+<div class="button-container">
+    <img src="{% static 'image/sett.png' %}" title="Settings" onclick="openModal()">
+    <div class="button" onclick="openModal()">Delete Category</div>
+    <!-- Модальное окно -->
+    </div>
+    <div class="modal" id="deleteModal" style="font-size: 38px; font-family: 'Source Code Pro', monospace; text-shadow: 10px 10px 10px black; text-align: right;">
+        <h2>Delete Category</h2>
+        <p>Choose the category you want to delete:</p>
+        <form method="post" action="{% url 'languages:delete_with_choose_category' %}">
+            {% csrf_token %}
+            <select name="category_id" id="categorySelect">
+                <!-- Здесь вы можете добавить опции для каждой категории -->
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <!-- Добавляем скрытое поле для передачи выбранной категории -->
+            <input type="hidden" name="selected_category_id" id="selectedCategoryId">
+            <button type="submit" onclick="setSelectedCategoryId()">Delete</button>
+            <button type="button" onclick="closeModal()">Cancel</button>
+        </form>
+        </div>
+        <div class="new-category" style="text-align: right;">
+            <a href="{% url 'languages:new_category' %}">New category</a>
+        </div>
+    </div>

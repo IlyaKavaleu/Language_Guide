@@ -28,14 +28,6 @@ footer {
 }
 
 
-/* ALL FOR CAPTION */
-.caption-container {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 18px;
-    position: relative;
-}
-
 
 @keyframes blinkAndScale {
   0%, 100% {
@@ -53,3 +45,60 @@ footer {
 .blinking-text {
   animation: blinkAndScale 3s infinite; /* 2s - время одного цикла анимации, infinite - бесконечное повторение */
 }
+
+
+/* ALL FOR CAPTION */
+@import url('https://fonts.cdnfonts.com/css/robot');
+        #slideShow {
+            max-width: 600px;
+            max-height: 600px;
+            transition: opacity 1s ease-in-out;
+
+
+        .caption {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+            background-color: #3498db; /* Цвет фона */
+            color: #fff; /* Цвет текста */
+            padding: 10px 20px; /* Внутренние отступы */
+            border-radius: 5px; /* Скругление углов */
+            font-size: 30px;
+        }
+
+        .caption-container:hover #caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+@import url('https://fonts.cdnfonts.com/css/robot');
+        #slideShow {
+            max-width: 600px;
+            max-height: 600px;
+            transition: opacity 1s ease-in-out;
+
+        .caption-container {
+            text-align: center;
+            margin-top: 10px;
+            position: relative;
+            background-color: yellow;
+        }
+
+        .caption {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+            background-color: #3498db; /* Цвет фона */
+            color: #fff; /* Цвет текста */
+            padding: 10px 20px; /* Внутренние отступы */
+            border-radius: 5px; /* Скругление углов */
+            font-size: 30px;
+        }
+
+        .caption-container:hover #caption {
+            opacity: 1;
+            transform: translateY(0);
+        }

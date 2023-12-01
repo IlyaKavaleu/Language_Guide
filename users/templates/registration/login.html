@@ -1,26 +1,69 @@
 {% extends 'languages/base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="css_styles/login.css">
-</head>
-<body>
-<header class="logo">
-  <img src="image/logo.png">
-  <div class="margin-left">
-      <strong class="beautiful-button" onclick="handleButtonClick(1)">Engineering manager</strong>
-      <strong class="beautiful-button" onclick="handleButtonClick(2)">Languages</strong>
-      <strong class="beautiful-button">Login</strong>
-      <strong class="beautiful-button">Register</strong>
-  </div>
-</header>
-{% block content %}
-{% if form.errors %}
-<p>Your username and password didn't match. Pleasy try again.</p>
-{% endif %}
+    <style>
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-top: -100px;
+            animation: shake 2s infinite; /* 2.5s дрожания + 3s пауза = 5.5s цикл, 6s для возможности отображения начального состояния */
+            animation-timing-function: ease-in-out;
+        }
 
+        .login {
+            background-color: #eaf2ff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login h2 {
+            color: #333;
+        }
+
+        .login p {
+            color: #555;
+        }
+
+        .login form {
+            margin-top: 20px;
+        }
+
+        .login input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
     <div class="login-container">
         <div class="login pale-green" id="loginBlock">
             <h2>Login</h2>
@@ -33,6 +76,7 @@
             </form>
         </div>
     </div>
-{% endblock content %}
 </body>
+
 </html>
+{% endblock content %}

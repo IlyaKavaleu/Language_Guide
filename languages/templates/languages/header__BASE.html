@@ -1,0 +1,19 @@
+{% load static %}
+<header class="navbar">
+    <div class="logo">
+        <a href="{% url 'languages:index' %}"><img src="{% static 'image/logo.png' %}" class="logo-image"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{% url 'languages:index' %}">Engineering Manager</a></li>
+            <li><a href="{% url 'languages:categories' %}">Languages</a></li>
+            {% if user.is_authenticated %}
+                Hello, {{ user.username }}.
+                <li><a href="{% url 'users:logout' %}">LogOut</a></li>
+            {% else %}
+                <li><a href="{% url 'users:login' %}">Login</a></li>
+                <li><a href="{% url 'users:register' %}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
