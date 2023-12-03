@@ -13,18 +13,15 @@
         }
 
         .register-container {
-            display: flex;
-            margin-top: -70px;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            animation: shake 6s infinite; /* 2.5s дрожания + 3s пауза = 5.5s цикл, 6s для возможности отображения начального состояния */
-            animation-timing-function: ease-in-out;
+            max-width: 400px; /* Задайте максимальную ширину вашего блока */
+            margin: auto; /* Центрируйте блок по горизонтали */
+            margin-top: 10px;
         }
+
 
         .register {
             background-color: #eaf2ff;
-            padding: 10px; /* уменьшим отступы */
+            padding: 5px; /* уменьшим отступы */
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
