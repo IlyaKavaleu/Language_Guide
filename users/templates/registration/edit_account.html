@@ -1,0 +1,11 @@
+{% extends 'languages/base.html' %}
+{% load static %}
+{% block content %}
+    <div style="text-align: center;">
+        <form action="{% url 'users:edit_account' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-button">Save</button>
+        </form>
+    </div>
+{% endblock content%}

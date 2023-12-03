@@ -1,7 +1,7 @@
 {% load static %}
 <header class="navbar">
     <div class="logo">
-        <a href="{% url 'languages:index' %}"><img src="{% static 'image/logo.png' %}" class="logo-image"></a>
+        <a href="{% url 'languages:index' %}"><img src="{% static 'image/Astro-Logo.png' %}" class="logo-image"></a>
     </div>
     <nav>
         <ul>
@@ -9,6 +9,7 @@
             <li><a href="{% url 'languages:categories' %}">Languages</a></li>
             {% if user.is_authenticated %}
                 Hello, {{ user.username }}.
+                <li><a href="{% url 'users:my_account' %}">My Account</a></li>
                 <li><a href="{% url 'users:logout' %}">LogOut</a></li>
             {% else %}
                 <li><a href="{% url 'users:login' %}">Login</a></li>

@@ -1,4 +1,5 @@
 {% extends 'languages/base.html' %}
+{% load static %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +8,10 @@
     <meta charset="UTF-8">
     <title>Register</title>
     <style>
+        body {
+            background-image: url('{% static 'image/star_sky.jpg' %}')
+        }
+
         .register-container {
             display: flex;
             margin-top: -70px;

@@ -1,0 +1,83 @@
+{% extends 'languages/base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-info img {
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        .user-details p {
+            margin: 0;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 style="text-align: center;">My account</h1>
+    </header>
+
+    <div class="container">
+        <div class="profile-info">
+            {% if user.is_authenticated %}
+                <img src="{% static 'image/user_account/default_avatar.jpg' %" alt="User Avatar" width="150;" height="150px;">
+            {% else %}
+            {% endif %}
+            <h2>{{ user.username }}</h2>
+            <h2>{{ user.first_name }}</h2>
+            <h2>{{ user.last_name }}</h2>
+            <h2>{{ user.email }}</h2>
+        </div>
+
+        <div class="user-details">
+            <p>Электронная почта: user@example.com</p>
+            <p>Телефон: +7 (123) 456-7890</p>
+            <p>Город: Мой город</p>
+        </div>
+
+        <div class="actions">
+            <a href="{% url 'users:edit_account' %}"><button class="button">Изменить профиль</button></a>
+        </div>
+    </div>
+</body>
+{% endblock content %}
+</html>
