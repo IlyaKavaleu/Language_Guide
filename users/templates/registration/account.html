@@ -49,7 +49,6 @@
             background-color: #0056b3;
         }
     </style>
-</head>
 
 <body>
     <header>
@@ -58,10 +57,11 @@
 
     <div class="container">
         <div class="profile-info">
-            {% if user.is_authenticated %}
-                <img src="{% static 'image/user_account/default_avatar.jpg' %" alt="User Avatar" width="150;" height="150px;">
-            {% else %}
-            {% endif %}
+             <div class="col-lg-12 text-center">
+                <img width="200" height="200"
+                     src="{% if user.image %}{{ user.image.url }} {% else %}{% static 'image/user_account/default_avatar.jpg'%}{% endif %}"
+                     class="img-thumbnail">
+            </div>
             <h2>{{ user.username }}</h2>
             <h2>{{ user.first_name }}</h2>
             <h2>{{ user.last_name }}</h2>

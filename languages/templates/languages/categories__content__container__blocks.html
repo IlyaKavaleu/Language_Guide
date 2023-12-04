@@ -1,3 +1,16 @@
+{% load static %}
+<style>
+    .basket-container {
+        position: relative;
+    }
+
+    .basket-image {
+        position: absolute;
+        top: -20px;
+        right: 0;
+    }
+</style>
+
 <div class="content-container">
     <div class="container">
         {% for category in categories %}
@@ -9,6 +22,11 @@
                     {% else %}
                         No image available
                     {% endif %}
+                    <a href="{% url 'basket:add_to_basket' category.id %}">
+                        <div class="basket-container">
+                            <img src="{% static 'image/basket.png' %}" width="30" height="30" class="basket-image" alt="Basket Image">
+                        </div>
+                    </a>
                 </a>
             </div>
         {% endfor %}

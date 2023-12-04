@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import User
 
 
 class ExtendedUserCreationForm(UserCreationForm):
@@ -17,4 +18,4 @@ class ExtendedUserCreationForm(UserCreationForm):
 class UserEditForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', ]
+        fields = ['username', 'first_name', 'last_name', 'email', 'image', ]

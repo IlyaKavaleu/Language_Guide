@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <div style="text-align: center;">
-        <form action="{% url 'users:edit_account' %}" method="post">
+        <form action="{% url 'users:edit_account' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <button class="btn btn-button">Save</button>

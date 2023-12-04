@@ -1,8 +1,9 @@
-from django.contrib.auth.models import User
+from programming_guide.settings import AUTH_USER_MODEL
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from users.forms import UserEditForm, ExtendedUserCreationForm
+from users.models import User
 
 
 def register(request):
@@ -29,7 +30,7 @@ def edit_account(request):
     if request.method != 'POST':
         form = UserEditForm(instance=user)
     else:
-        form = UserEditForm(instance=user, data=request.POST)
+        form = UserEditForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
             return redirect('languages:index')
