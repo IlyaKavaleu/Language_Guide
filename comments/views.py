@@ -20,5 +20,4 @@ def add_comment_to_language(request, language_id):
             comment.save()
             return redirect('languages:language', language_id=language.id, category_id=category_id)
     context = {'form': form, 'language': language}
-    context = {'form': form, 'language': language}
     return render(request, 'comments/add_comment_to_language.html', context)

@@ -25,6 +25,8 @@ urlpatterns = [
     path('users/', include('users.urls', 'users')),
     path('comments/', include('comments.urls', 'comments')),
     path('basket/', include('basket.urls', 'basket')),
+    path('opinions/', include('opinions.urls', 'opinions')),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

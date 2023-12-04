@@ -6,6 +6,25 @@
     <title>Title</title>
 </head>
 {% block content %}
+<style>.comment {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-user {
+    color: #007bff;
+}
+
+.comment-text {
+    font-size: 16px;
+}
+
+.comment-created-at {
+    color: #888;
+    font-size: 12px;
+}
+</style>
 <body>
   {{ language.name }}<br>
   {{ language.description }}
@@ -17,7 +36,12 @@
     <a href="{% url 'languages:edit_language' language.id %}">Edit language</a>
     <a href="{% url 'languages:delete_language' language.id %}">Delete language</a>
   {% for comment in comments %}
-    <h4>{{ comment }}</h4>
+  <div class="comment">
+      <h4 class="comment-user">{{ comment.user }}</h4>
+      <p class="comment-text">{{ comment.text }}</p>
+      <span class="comment-created-at">{{ comment.created_at }}</span>
+  </div>
+
   {% endfor %}
   <br>
   <br>

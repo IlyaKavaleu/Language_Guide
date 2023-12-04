@@ -1,0 +1,17 @@
+{% extends 'languages/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+  <form action="{% url 'opinions:add_opinion' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+      <button class="btn btn-button">Оставить отзыв</button>
+  </form>
+{% endblock content %}
+</body>
+</html>

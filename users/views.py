@@ -1,3 +1,4 @@
+from basket.models import Basket
 from programming_guide.settings import AUTH_USER_MODEL
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
@@ -21,7 +22,8 @@ def register(request):
 
 def account(request):
     user = User.objects.get(id=request.user.id)
-    context = {'user': user}
+    baskets = Basket.objects.filter(user=user)
+    context = {'user': user, 'baskets': baskets}
     return render(request, 'registration/account.html', context)
 
 

@@ -4,36 +4,46 @@
 {% block content %}
     <style>
         .container {
-            max-width: 600px;
-            margin: 20px auto;
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;  /* Добавлено свойство overflow */
+        }
+
+        .profile-info,
+        .container-basket {
+            width: 40%;
             background-color: #fff;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-        }
-
-        .profile-info {
-            text-align: center;
-            margin-bottom: 20px;
+            margin-top: 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .profile-info img {
             border-radius: 50%;
-            margin-bottom: 10px;
+            margin-bottom: -20px;
         }
 
         h1 {
             color: #007bff;
+            text-align: center;
+            margin-bottom: 10px; /* Добавлено свойство margin-bottom */
         }
 
-        .user-details p {
-            margin: 0;
+        .user-details h2 {
+            margin-bottom: 5px;  /* Добавлено свойство margin-bottom */
         }
 
         .actions {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 10px;  /* Уменьшено значение margin-top */
         }
 
         .button {
@@ -50,27 +60,38 @@
         }
     </style>
 
-<body>
-    <header>
-        <h1 style="text-align: center;">My account</h1>
-    </header>
+    <body>
+        <header>
+            <h1>My account</h1>
+        </header>
 
-    <div class="container">
-        <div class="profile-info">
-             <div class="col-lg-12 text-center">
-                <img width="200" height="200"
-                     src="{% if user.image %}{{ user.image.url }} {% else %}{% static 'image/user_account/default_avatar.jpg'%}{% endif %}"
-                     class="img-thumbnail">
+        <div class="container">
+            <div class="profile-info">
+                <div class="col-lg-12 text-center">
+                    <img width="150" height="150"
+                         src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'image/user_account/default_avatar.jpg' %}{% endif %}"
+                         class="img-thumbnail">
+                </div>
+                <h2>{{ user.username }}</h2>
+                <h2>{{ user.first_name }}</h2>
+                <h2>{{ user.last_name }}</h2>
+                <h2>{{ user.email }}</h2>
+                <div class="actions">
+                    <a href="{% url 'users:edit_account' %}"><button class="button">Изменить профиль</button></a>
+                </div>
             </div>
-            <h2>{{ user.username }}</h2>
-            <h2>{{ user.first_name }}</h2>
-            <h2>{{ user.last_name }}</h2>
-            <h2>{{ user.email }}</h2>
+            <div class="container-basket">
+                <h2>Basket with your lessons</h2>
+                {% for basket in baskets %}
+                    <a href="{% url 'languages:category' basket.category.id %}">
+                        <div class="inline">
+                            {{ basket.category }}
+                            <img src="{{ basket.category.image.url }}" width="20" height="20" style="margin-top: 5px;">
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
         </div>
-        <div class="actions">
-            <a href="{% url 'users:edit_account' %}"><button class="button">Изменить профиль</button></a>
-        </div>
-    </div>
-</body>
+    </body>
 {% endblock content %}
 </html>
