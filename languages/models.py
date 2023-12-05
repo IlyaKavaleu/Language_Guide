@@ -3,7 +3,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    description = models.TextField(max_length=1000, unique=True)
+    description = models.TextField(max_length=25000, unique=True)
     image = models.ImageField(upload_to='media/image/', blank=True, null=True)
     views = models.PositiveIntegerField(default=0)
 
@@ -20,8 +20,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
-
 
 
 class Language(models.Model):

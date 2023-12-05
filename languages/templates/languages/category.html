@@ -10,30 +10,112 @@
 
 {% block content %}
 <style>
-        .btn-container {
-            width: 250px;
-            height: 250px;
-            animation: shake 6s infinite; /* 2.5s дрожания + 3s пауза = 5.5s цикл, 6s для возможности отображения начального состояния */
-            animation-timing-function: ease-in-out;
+    .btn-container {
+        width: 250px;
+        height: 250px;
+        animation: shake 6s infinite;
+        animation-timing-function: ease-in-out;
+    }
+
+    @keyframes shake {
+        0%, 100% {
+            transform: translateX(0) rotate(0) scale(1);
         }
-
-        @keyframes shake {
-            0%, 100% {
-                transform: translateX(0) rotate(0) scale(1);
-            }
-            25% {
-                transform: translateX(-5px) rotate(-5deg) scale(1.1);
-            }
-            50% {
-                transform: translateX(5px) rotate(5deg) scale(0.9);
-            }
-            75% {
-                transform: translateX(-5px) rotate(-5deg) scale(1.1);
-            }
+        25% {
+            transform: translateX(-5px) rotate(-5deg) scale(1.1);
         }
+        50% {
+            transform: translateX(5px) rotate(5deg) scale(0.9);
+        }
+        75% {
+            transform: translateX(-5px) rotate(-5deg) scale(1.1);
+        }
+    }
 
+    .dropdown {
+        position: absolute;
+        top: 170px;
+        right: 30px;
+        display: inline-block;
+    }
 
+    .dropbtn {
+        background-color: #3498db;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .description-block {
+        max-width: 1400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        text-align: left;
+        line-height: 1.5;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .language-block {
+        background-color: rgba(255, 255, 255, 0.7);  /* Прозрачный белый цвет */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 10px;
+        padding: 10px;
+        transition: all 0.3s ease;  /* Плавный переход при изменении размера */
+    }
+
+    .language-block:hover {
+        transform: scale(1.1);  /* Увеличение размера при наведении */
+    }
+
+    .language-block a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .language-block img {
+        width: 50px;
+        height: 50px;
+        margin-top: 5px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 105px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #2980B9;
+    }
 </style>
+
 <body>
     <div style="text-align: center;">
         <div id="caption" style="font-size: 38px; font-family: 'Source Code Pro', monospace; text-shadow: 10px 10px 10px black; margin-bottom: 20px; margin-top:20px;">
@@ -42,25 +124,34 @@
         <img class="btn-container" src="{{ category.image.url }}" alt="{{ category.title }}">
         <br>
         <br>
-        {% for language in languages %}
-        <a href="{% url 'languages:language' category.id language.id %}">{{ language.name }}</a>
-        {% if category.image %}
-        <img src="{{ language.image.url }}" alt="{{ language.title }}" width="50px" height="50px">
-        {% else %}
-        {% endif %}
-        {% endfor %}
+        <div class="description-block">
+            {% for language in languages %}
+            <div class="language-block">
+                <a href="{% url 'languages:language' category.id language.id %}">
+                    <strong>{{ language.name }}</strong>
+                    {% if category.image %}
+                        <img src="{{ language.image.url }}" alt="{{ language.title }}">
+                    {% endif %}
+                </a>
+            </div>
+            {% endfor %}
+            <p>{{ category.description }}</p>
+        </div>
         <br>
         <br>
         <br>
-        <div>
-            <a href="{% url 'languages:categories' %}">Back to Categories</a>
-            <h3><a href="{% url 'languages:new_language' category.id %}">Add a New Language</a></h3>
-            <h3><a href="{% url 'languages:edit_category' category.id %}">Edit your category</a></h3>
-            <h3><a href="{% url 'languages:delete_category' category.id %}">Delete your category</a></h3>
+        <br>
+        <br>
+        <div class="dropdown">
+            <button class="dropbtn">Настройки</button>
+            <div class="dropdown-content">
+                <a href="{% url 'languages:edit_category' category.id %}">Edit</a>
+<!--                <a href="{% url 'languages:delete_category' category.id %}">Delete</a>-->
+                <a href="{% url 'languages:new_language' category.id %}">Add</a>
+                <a href="{% url 'languages:categories' %}">Back</a>
+            </div>
         </div>
     </div>
 </body>
-
 {% endblock content %}
-
 </html>

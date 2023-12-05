@@ -1,27 +1,59 @@
 {% load static %}
 
 <style>
+    body {
+        margin: 0;
+    }
+
+    .settings-container {
+        position: fixed;
+        top: 100px; /* Установите значение, которое вам нужно */
+        right: 10px;
+        background-color: #3498db;
+        border-radius: 10px;
+        padding: 4px;
+    }
+
     .settings-menu {
-        position: relative;
-        display: inline-block;
         text-align: right;
     }
 
-    .settings-menu-btn, .settings-menu-content a {
-        padding: 12px 16px;
+    .settings-menu-btn {
+        padding: 8px 12px;
         text-decoration: none;
         display: block;
-        color: #333;
+        color: #fff;
         cursor: pointer;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .settings-menu-btn:hover {
+        color: #eee;
     }
 
     .settings-menu-content {
         display: none;
         position: absolute;
         background-color: #f9f9f9;
-        min-width: 160px;
+        min-width: 120px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
+        border-radius: 4px;
+        right: 0;
+    }
+
+    .settings-menu-content a {
+        padding: 8px 12px;
+        text-decoration: none;
+        display: block;
+        color: #333;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .settings-menu-content a:hover {
+        background-color: #ddd;
     }
 
     .settings-menu:hover .settings-menu-content {
@@ -30,33 +62,58 @@
 
     .modal {
         display: none;
-        /* Другие стили модального окна */
+    }
+
+    .modal button {
+        padding: 8px 12px;
+        margin-right: 8px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .modal button[type="submit"] {
+        background-color: #2ecc71;
+        color: #fff;
+    }
+
+    .modal button[type="submit"]:hover {
+        background-color: #27ae60;
+    }
+
+    .modal button[type="button"] {
+        background-color: #3498db;
+        color: #fff;
+    }
+
+    .modal button[type="button"]:hover {
+        background-color: #2980b9;
     }
 </style>
 
-<div class="settings-menu">
-    <div class="settings-menu-btn">Настройки</div>
-    <div class="settings-menu-content">
-        <div class="menu-item" onclick="openModal()">Delete Category</div>
-        <a href="{% url 'languages:new_category' %}" class="menu-item">New category</a>
+<div class="settings-container">
+    <div class="settings-menu">
+        <div class="settings-menu-btn">Настройки</div>
+        <div class="settings-menu-content">
+            <a href="{% url 'languages:new_category' %}" class="menu-item">Новая категория</a>
+            <div class="menu-item" onclick="openModal()">Удалить категорию</div>
+        </div>
     </div>
 </div>
 
-<!-- Модальное окно -->
-<div class="modal" id="deleteModal" style="font-size: 38px; font-family: 'Source Code Pro', monospace; text-shadow: 10px 10px 10px black; text-align: right;">
-    <p>Choose the category you want to delete:</p>
+<div class="modal" id="deleteModal" style="font-size: 14px; font-family: 'Source Code Pro', monospace; text-shadow: 1px 1px 1px black; text-align: right;">
+    <p>Выберите категорию для удаления:</p>
     <form method="post" action="{% url 'languages:delete_with_choose_category' %}">
         {% csrf_token %}
         <select name="category_id" id="categorySelect">
-            <!-- Здесь вы можете добавить опции для каждой категории -->
             {% for category in categories %}
                 <option value="{{ category.id }}">{{ category.name }}</option>
             {% endfor %}
         </select>
-        <!-- Добавляем скрытое поле для передачи выбранной категории -->
         <input type="hidden" name="selected_category_id" id="selectedCategoryId">
-        <button type="submit" onclick="setSelectedCategoryId()">Delete</button>
-        <button type="button" onclick="closeModal()">Cancel</button>
+        <button type="submit" onclick="setSelectedCategoryId()">Удалить</button>
+        <button type="button" onclick="closeModal()">Отмена</button>
     </form>
 </div>
 
@@ -70,9 +127,7 @@
     }
 
     function setSelectedCategoryId() {
-        // Добавьте код для установки выбранной категории в скрытое поле
-        // Например: document.getElementById('selectedCategoryId').value = выбранная_категория;
+        var selectedCategory = document.getElementById('categorySelect').value;
+        document.getElementById('selectedCategoryId').value = selectedCategory;
     }
 </script>
-
-\

@@ -17,10 +17,9 @@ def categories(request):
     return render(request, 'languages/categories.html', context)
 
 
-def category(request, id):
-    category = Category.objects.get(id=id)
-    languages = Language.objects.all().filter(category=category)
-    category.increment_views()
+def category(request, category_id):
+    category = Category.objects.get(id=category_id)
+    languages = Language.objects.all().filter(category=category).order_by('created')
     context = {'category': category, 'languages': languages}
     return render(request, 'languages/category.html', context)
 
@@ -47,7 +46,7 @@ def new_language(request, category_id):
             new_lang = form.save(commit=False)
             new_lang.category = category
             new_lang.save()
-            return redirect('languages:category', id=category.id)
+            return redirect('languages:category', category_id=category.id)
     context = {'category': category, 'form': form}
     return render(request, 'languages/new_language.html', context)
 
@@ -78,7 +77,7 @@ def edit_language(request, language_id):
     return render(request, 'languages/edit_language.html', context)
 
 
-def language(request, language_id, category_id):
+def language(request, category_id, language_id):
     language = Language.objects.get(id=language_id)
     category = language.category.id
     comments = Comments.objects.filter(language=language)
