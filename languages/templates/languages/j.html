@@ -1,31 +1,128 @@
-<div class="button-container">
-        <div class="button">
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Стили для основного контейнера меню и кнопки */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Стили для выпадающего контейнера */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* Стили для ссылок внутри выпадающего контейнера */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Стили для ссылок при наведении */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Отображение выпадающего контейнера при клике на кнопку */
+        .show {
+            display: block;
+        }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            font-size: 38px;
+            font-family: 'Source Code Pro', monospace;
+            text-shadow: 10px 10px 10px black;
+            text-align: right;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+<div class="dropdown">
+    <button onclick="toggleDropdown()" class="dropbtn">Настройки</button>
+
+    <div id="myDropdown" class="dropdown-content">
+        <div style="text-align: right;">
             <a href="{% url 'languages:new_category' %}">New category</a>
         </div>
-        <div class="button">
-            <a href="{% url 'languages:delete_all_categories' %}">Delete all category</a>
+
+        <div class="button" onclick="openModal()">Delete Category</div>
+        <div class="modal" id="deleteModal">
+            <h2>Delete Category</h2>
+            <p>Choose the category you want to delete:</p>
+            <form method="post" action="{% url 'languages:delete_with_choose_category' %}">
+                {% csrf_token %}
+                <select name="category_id" id="categorySelect">
+                    <!-- Здесь вы можете добавить опции для каждой категории -->
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                <!-- Добавляем скрытое поле для передачи выбранной категории -->
+                <input type="hidden" name="selected_category_id" id="selectedCategoryId">
+                <button type="submit" onclick="setSelectedCategoryId()">Delete</button>
+                <button type="button" onclick="closeModal()">Cancel</button>
+            </form>
         </div>
     </div>
-
-
-
-
-также чтобы это удалить нужно из бд нужно написать view и передать туда данные которые удаляем чтобы удалить их
-
-
-
-<div class="bulletsBlock">
-    <div class="bullet-item">
-        <span class="iconBullet fa fa-cog"></span>
-        <p class="titleBullet">Выгода 1</p>
-        <p class="hideText">Дополнительный<br>скрытый текст 1</p>
-    </div>
- 
-    <div class="bullet-item">
-        <!-- Содержимое 2-го блока -->
-    </div>
- 
-    <div class="bullet-item">
-        <!-- Содержимое 3-го блока -->
-    </div>
 </div>
+
+<script>
+    function toggleDropdown() {
+        var dropdown = document.getElementById("myDropdown");
+        dropdown.classList.toggle("show");
+    }
+
+    function openModal() {
+        var modal = document.getElementById("deleteModal");
+        modal.style.display = "block";
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("deleteModal");
+        modal.style.display = "none";
+    }
+
+    // Закрытие выпадающего меню при клике вне его области
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

@@ -5,6 +5,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(max_length=1000, unique=True)
     image = models.ImageField(upload_to='media/image/', blank=True, null=True)
+    views = models.PositiveIntegerField(default=0)
 
     class Meta:
         """In this class,
@@ -13,8 +14,14 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
+    def increment_views(self):
+        self.views += 1
+        self.save()
+
     def __str__(self):
         return self.name
+
+
 
 
 class Language(models.Model):

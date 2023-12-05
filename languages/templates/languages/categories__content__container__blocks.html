@@ -1,5 +1,5 @@
 {% load static %}
-<style>
+<style xmlns="http://www.w3.org/1999/html">
     .basket-container {
         position: relative;
     }
@@ -22,6 +22,13 @@
                     {% else %}
                         No image available
                     {% endif %}
+
+                   <div style="text-align: left;" class="inline">
+                        <p style="display: inline-block; margin: 0;">
+                            Количество просмотров: <strong>{{ category.views }}</strong>
+                        </p>
+                    </div>
+
                     <a href="{% url 'basket:add_to_basket' category.id %}">
                         <div class="basket-container">
                             <img src="{% static 'image/basket.png' %}" width="30" height="30" class="basket-image" alt="Basket Image">
