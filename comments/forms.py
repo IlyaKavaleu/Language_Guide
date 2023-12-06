@@ -7,5 +7,5 @@ class CommentForm(forms.ModelForm):
         model = Comments
         fields = ['text']
         widgets = {
-            'text': forms.TextInput(attrs={'size': 30}),
+            'text': forms.TextInput(attrs={'size': 30, 'placeholder': 'Оставь комментарий'}),
         }

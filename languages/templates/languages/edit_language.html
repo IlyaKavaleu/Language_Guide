@@ -1,18 +1,77 @@
 {% extends 'languages/base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .class-form {
+            width: 80%;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .class-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .class-form input[type="text"],
+        .class-form input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .class-form button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .class-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
-{% block content %}
 <body>
-    {{ language }}
-    <form action="{% url 'languages:edit_language' language.id %}" method="post" enctype="multipart/form-data">
+    <h1>{{ language }}</h1>
+    <form class="class-form" action="{% url 'languages:edit_language' language.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
-        <button class="button">Save</button>
+        {{ form.as_p }}
+        <button type="submit">Save</button>
     </form>
 </body>
-{% endblock content %}
 </html>
+{% endblock content %}

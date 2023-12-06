@@ -6,25 +6,32 @@
     <title>Title</title>
 </head>
 {% block content %}
-<style>.comment {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-}
+<style>
+    .comment {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
 
-.comment-user {
-    color: #007bff;
-}
+    .comment-user {
+        color: #007bff;
+        font-weight: bold;
+    }
 
-.comment-text {
-    font-size: 16px;
-}
+    .comment-text {
+        font-size: 16px;
+        color: #333;
+    }
 
-.comment-created-at {
-    color: #888;
-    font-size: 12px;
-}
-.description-block {
+    .comment-created-at {
+        color: #888;
+        font-size: 12px;
+    }
+
+    .description-block {
         max-width: 1400px;
         margin: 20px auto;
         padding: 20px;
@@ -38,89 +45,91 @@
         justify-content: space-around;
         flex-wrap: wrap;
     }
-.opinion-block {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
-.comment {
-    margin-bottom: 15px;
-}
+    .opinion-block {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-.comment-user {
-    color: #333;
-}
+    .add-comment-section {
+        text-align: center;
+        margin-top: 30px;
+    }
 
-.comment-text {
-    color: #555;
-}
+    .add-comment-title {
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+    }
 
-.comment-created-at {
-    color: #888;
-    font-size: 0.8em;
-}
+    .form-group {
+        margin-bottom: 15px;
+    }
 
-.add-comment-section {
-    text-align: center;
-    margin-top: 30px;
-}
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+        font-weight: bold;
+    }
 
-.add-comment-title {
-    color: #333;
-}
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border-top: 1px solid #ccc;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+        border-left: none;
+        border-radius: 1px;
+        margin-bottom: 10px;
 
-.form-group {
-    margin-bottom: 15px;
-}
+    }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
+    .submit-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        margin-left: 5px;
+    }
 
-input[type="text"],
-textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+    .submit-button:hover {
+        background-color: #45a049;
+    }
 
-.submit-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-}
+    .btn-styles {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 5px;
+        margin-left: 40px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #00bcd4;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
 
-.submit-button:hover {
-    background-color: #45a049;
-}
+    .btn-styles:hover {
+        background-color: #008ba3;
+    }
 
-.btn-styles {
-    display: inline-block;
-    padding: 8px 16px;
-    margin: 5px;
-    margin-left: 40px;
-    text-decoration: none;
-    color: #fff;
-    background-color: #00bcd4;
-    border-radius: 4px;
-    transition: background-color 0.3s ease; /* Плавное изменение цвета фона при наведении */
-}
+    .delete-link {
+        color: #f00;
+        text-decoration: none;
+        margin-left: 10px;
+    }
 
-.btn-styles :hover {
-    background-color: #008ba3;
-}
-
+    .delete-link:hover {
+        text-decoration: underline;
+    }
 
 </style>
 <body>
@@ -145,11 +154,17 @@ textarea {
             <h4 class="comment-user">user [{{ comment.user }}]</h4>
             <p class="comment-text">{{ comment.text }}</p>
             <span class="comment-created-at">{{ comment.created_at }}</span>
-            <a style="text-align: right:" href="{% url 'comments:delete_comment' comment.language.id comment.id %}">Delete</a>
+            <a class="delete-link" href="{% url 'comments:delete_comment' comment.language.id comment.id %}">Delete</a>
         </div>
     {% endfor %}
 
-    {% include 'comments/add_comment_to_language.html'%}
+     <form class="add-comment-section" action="{% url 'comments:add_comment_to_language' language.id %}" method="post">
+        {% csrf_token %}
+        <div class="add-comment-title" style="margin-bottom: 2px;">Add your comment</div>
+         {{ commentForm.text }}
+        <button class="submit-button" type="submit" style="text-align: right;">Send</button>
+    </form>
+
 </div>
 </body>
 <br>

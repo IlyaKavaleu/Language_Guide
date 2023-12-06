@@ -1,20 +1,66 @@
 {% extends 'languages/base.html' %}
-{% load bootstrap4 %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .custom-form {
+            width: 80%;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .custom-form p {
+            color: #555;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .custom-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .custom-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
-{% block content %}
 <body>
-    <h1>{{ category }}</h1>
-    <p>Add category</p>
-    <form action="{% url 'languages:new_category' %}" method="post" class="form" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <button class="btn btn-primary">Add category</button>
-    </form>
+        <h1>Add category</h1>
+        <form action="{% url 'languages:new_category' %}" method="post" class="custom-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="custom-button">Add category</button>
+        </form>
 </body>
-{% endblock content %}
 </html>
+{% endblock content %}

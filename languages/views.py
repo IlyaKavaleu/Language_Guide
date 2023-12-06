@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
+from comments.forms import CommentForm
 from comments.models import Comments
 from languages import forms
 from languages.models import Category, Language
@@ -82,7 +83,8 @@ def language(request, category_id, language_id):
     language = Language.objects.get(id=language_id)
     category = language.category.id
     comments = Comments.objects.filter(language=language)
-    context = {'language': language, 'category': category, 'comments': comments}
+    commentForm = CommentForm()
+    context = {'language': language, 'category': category, 'comments': comments, 'commentForm': commentForm}
     return render(request, 'languages/language.html', context)
 
 
