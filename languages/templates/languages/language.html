@@ -105,6 +105,23 @@ textarea {
     background-color: #45a049;
 }
 
+.btn-styles {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    margin-left: 40px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #00bcd4;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Плавное изменение цвета фона при наведении */
+}
+
+.btn-styles :hover {
+    background-color: #008ba3;
+}
+
+
 </style>
 <body>
   <div class="description-block">
@@ -119,28 +136,21 @@ textarea {
     {% endif %}
   </div>
 
-    <a href="{% url 'languages:edit_language' language.id %}">Edit language</a>
-    <a href="{% url 'languages:delete_language' language.id %}">Delete language</a>
+    <a href="{% url 'languages:edit_language' language.id %}" class="btn-styles">Edit language</a>
+    <a href="{% url 'languages:delete_language' language.id %}" class="btn-styles">Delete language</a>
  <div class="opinion-block">
      <h2 style="text-align: center;">Комментарии к уроку</h2>
     {% for comment in comments %}
         <div class="comment">
-            <h4 class="comment-user">{{ comment.user }}</h4>
+            <h4 class="comment-user">user [{{ comment.user }}]</h4>
             <p class="comment-text">{{ comment.text }}</p>
             <span class="comment-created-at">{{ comment.created_at }}</span>
+            <a style="text-align: right:" href="{% url 'comments:delete_comment' comment.language.id comment.id %}">Delete</a>
         </div>
     {% endfor %}
 
-    <div class="add-comment-section">
-        <form action="{% url 'comments:add_comment_to_language' language.id %}" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+    {% include 'comments/add_comment_to_language.html'%}
 </div>
-
-
 </body>
 <br>
 <br>
@@ -151,5 +161,5 @@ textarea {
 <br>
 <br>
 <br>
-<br>d
+<br>
 {% endblock content %}

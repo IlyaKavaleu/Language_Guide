@@ -20,6 +20,7 @@ def categories(request):
 def category(request, category_id):
     category = Category.objects.get(id=category_id)
     languages = Language.objects.all().filter(category=category).order_by('created')
+    category.increment_views()
     context = {'category': category, 'languages': languages}
     return render(request, 'languages/category.html', context)
 

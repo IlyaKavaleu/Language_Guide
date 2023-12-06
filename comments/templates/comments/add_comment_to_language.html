@@ -1,9 +1,5 @@
-{% extends 'languages/base.html' %}
-{% block content %}
-<h2>Add comment</h2>
   <form action="{% url 'comments:add_comment_to_language' language.id %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit</button>
   </form>
-{% endblock content %}
