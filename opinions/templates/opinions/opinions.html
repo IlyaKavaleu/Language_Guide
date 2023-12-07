@@ -1,21 +1,146 @@
 {% extends 'languages/base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 </head>
-<body>
+
 {% block content %}
-    <div style="text-align: center;">
-        <a href="{% url 'opinions:add_opinion' %}">Add opinion</a>
+<style>
+.koguvcavis-varazdel {
+  padding: 38px 0;
+  background: #adadad;
+  color: #2f2f2f;
+  text-align: center;
+  margin-bottom: 70px;
+}
+.sestim-donials{
+  max-width: 1200px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+.sectionesag {
+  width: 195px;
+  height: 3px;
+  background: #498a2d;
+  margin: 23px auto;
+}
+
+.sectionesag-2 {
+  width: 180px;
+  height: 3px;
+  background: #498a2d;
+  margin-left: 16px;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: -5px;
+  margin-bottom: 20px;
+}
+
+.add-opinion-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #3498db; /* Цвет фона кнопки */
+  color: #ffffff; /* Цвет текста кнопки */
+  text-decoration: none;
+  border-radius: 5px; /* Округление уголков кнопки */
+  font-size: 16px;
+}
+
+
+.sagestim-lonials{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Adjusted to space between items */
+}
+.vemotau-vokusipol{
+  width: calc(30% - 10px); /* Определите размер блока с учетом отступов */
+  box-sizing: border-box;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background-color: #f9f4f4; /* Цвет фона блока */
+}
+.testimonial {
+  background: #f9f4f4;
+  padding: 28px;
+}
+.testimonial img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.gecedanam{
+  font-size: 20px;
+  text-transform: uppercase;
+  margin: 20px 0;
+}
+.apogered-gselected{
+  color: #53b32b;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width:960px) {
+  .vemotau-vokusipol{
+    width: 48%; /* Adjusted to make each item take up about half the container width */
+    max-width: 48%;
+  }
+}
+
+@media screen and (max-width:600px) {
+  .vemotau-vokusipol{
+    width: 100%; /* Adjusted to make each item take up the full container width */
+    max-width: 100%;
+  }
+}
+</style>
+<body>
+  <h1 style="margin-top: 30px; margin-left: 30px; color: blue;">ОТЗЫВЫ</h1>
+  <div class="sectionesag-2"></div>
+  <h4 style="margin-left: 16px;">Только благодаря каждому из Вас, мы становимся лучше. Учились на нашем сайте и Вам есть что сказать? Тогда оставьте отзыв.</h4>
+  <div class="koguvcavis-varazdel">
+
+  <a href="{% url 'opinions:add_opinion' %}">
+    <div class="button-container" style="text-align: center;">
+      <div class="add-opinion-button">
+        Добавить отзыв
+      </div>
     </div>
-    {% for opinion in opinions %}
-        <div style="text-align: center;">
-            {{ opinion.user }}
-            {{ opinion.text }}
-        </div>
-    {% endfor %}
-{% endblock content %}
+  </a>
+
+    <div class="sestim-donials">
+      <div class="sagestim-lonials">
+        {% for opinion in opinions %}
+          <div class="vemotau-vokusipol">
+            <div class="testimonial">
+              {% if opinion.user.image %}
+                <img src="{{ opinion.user.image.url }}" alt="">
+              {% else %}
+                <img src="{% static 'image/user_account/default_avatar.jpg' %}">
+              {% endif %}
+              <div class="gecedanam">{{ opinion.user.first_name }} {{ opinion.user.last_name }}</div>
+              <div class="apogered-gselected">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>{{ opinion.text }}</p>
+              <p>{{ opinion.created_at }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </body>
+{% endblock content %}
 </html>

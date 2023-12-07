@@ -47,8 +47,9 @@
     }
 
     .opinion-block {
-        max-width: 600px;
+        max-width: 1000px;
         margin: auto;
+        margin-top: 20px;
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 8px;
@@ -79,7 +80,7 @@
 
     input[type="text"],
     textarea {
-        width: 100%;
+        width: 95%;
         padding: 8px;
         border-top: 1px solid #ccc;
         border-right: none;
@@ -162,7 +163,7 @@
         {% csrf_token %}
         <div class="add-comment-title" style="margin-bottom: 2px;">Add your comment</div>
          {{ commentForm.text }}
-        <button class="submit-button" type="submit" style="text-align: right;">Send</button>
+        <button class="submit-button" type="submit" style="margin-left: 890px;">Send</button>
     </form>
 
 </div>

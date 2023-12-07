@@ -5,13 +5,50 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
 {% block content %}
+<style>
+  /* Стилизация формы для оставления отзыва */
+  form {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Стилизация полей ввода и кнопки */
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  .btn-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .btn-button:hover {
+    background-color: #45a049;
+  }
+</style>
+<body>
   <form action="{% url 'opinions:add_opinion' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-      <button class="btn btn-button">Оставить отзыв</button>
+    <button class="btn-button">Оставить отзыв</button>
   </form>
-{% endblock content %}
 </body>
 </html>
+{% endblock content %}
