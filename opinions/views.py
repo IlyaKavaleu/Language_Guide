@@ -12,6 +12,7 @@ def opinions(request):
 
 
 def add_opinion(request):
+    rating = request.POST.get('rating', None)
     if request.method != 'POST':
         form = OpinionForm()
     else:
@@ -21,5 +22,11 @@ def add_opinion(request):
             opinion.user = request.user
             opinion.save()
             return redirect('opinions:opinions')
-    context = {'form': form}
+    context = {'form': form, 'rating': rating}
     return render(request, 'opinions/add_opinion.html', context)
+
+
+def delete_opinion(request, opinion_id):
+    opinion = Opinion.objects.get(id=opinion_id)
+    opinion.delete()
+    return redirect('opinions:opinions')

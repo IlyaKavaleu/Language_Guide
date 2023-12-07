@@ -38,6 +38,14 @@
   margin-left: 16px;
 }
 
+
+.add-opinion-button:hover {
+  transform: scale(1.1); /* Увеличение размера при наведении */
+}
+.add-opinion-button:hover {
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.7), inset 0 0 10px rgba(52, 152, 219, 0.7);
+  /* Внешняя тень с подгоранием и внутренняя тень с подгоранием */
+}
 .button-container {
   text-align: center;
   margin-top: -5px;
@@ -52,7 +60,39 @@
   text-decoration: none;
   border-radius: 5px; /* Округление уголков кнопки */
   font-size: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Анимации для увеличения и подгорания */
 }
+
+.add-opinion-button:hover {
+  transform: scale(1.1); /* Увеличение размера при наведении */
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.7), inset 0 0 10px rgba(52, 152, 219, 0.7);
+  /* Подгорание при наведении */
+}
+
+
+
+.delete-button-container {
+  margin-left: 200px;
+}
+
+.delete-button {
+  display: inline-block;
+  padding: 8px 16px; /* Уменьшение размера кнопки */
+  background-color: #e74c3c; /* Цвет фона кнопки */
+  color: #ffffff; /* Цвет текста кнопки */
+  text-decoration: none;
+  border-radius: 5px; /* Округление уголков кнопки */
+  font-size: 14px; /* Уменьшение размера шрифта */
+  cursor: pointer; /* Изменение курсора при наведении */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Анимации для эффектов */
+}
+
+.delete-button:hover {
+  transform: scale(1.1); /* Увеличение размера при наведении */
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.7); /* Тень при наведении */
+}
+
+
 
 
 .sagestim-lonials{
@@ -126,16 +166,22 @@
                 <img src="{% static 'image/user_account/default_avatar.jpg' %}">
               {% endif %}
               <div class="gecedanam">{{ opinion.user.first_name }} {{ opinion.user.last_name }}</div>
-              <div class="apogered-gselected">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
               <p>{{ opinion.text }}</p>
               <p>{{ opinion.created_at }}</p>
-            </div>
+              <p>Оценка: {{ opinion.rating }}</p>
+                  {% if opinion.rating %}
+                    <div>
+                      {% for _ in "_"|rjust:opinion.rating %}
+                        <img src="{% static 'image/star_rating.png' %}" style="width: 25px; height: 25px;">
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                <div class="delete-button-container">
+                  <a href="{% url 'opinions:delete_opinion' opinion.id %}">
+                    <p class="delete-button">Удалить</p>
+                  </a>
+                </div>
+              </div>
           </div>
         {% endfor %}
       </div>
