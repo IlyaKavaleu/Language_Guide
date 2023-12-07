@@ -11,3 +11,9 @@ def add_to_basket(request, category_id):
     cart.save()
     context = {'category': category}
     return redirect('languages:categories')
+
+
+def delete_basket_from_basket(request, basket_id):
+    basket = Basket.objects.get(id=basket_id)
+    basket.delete()
+    return redirect('languages:index')

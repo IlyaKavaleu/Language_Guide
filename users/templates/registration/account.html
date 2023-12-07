@@ -87,6 +87,7 @@
                         <div class="inline">
                             {{ basket.category }}
                             <img src="{{ basket.category.image.url }}" width="20" height="20" style="margin-top: 5px;">
+                            <a href="{% url 'basket:delete_basket_from_basket' basket.id %}">Удалить</a>
                         </div>
                     </a>
                 {% endfor %}
