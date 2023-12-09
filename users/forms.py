@@ -18,4 +18,4 @@ class ExtendedUserCreationForm(UserCreationForm):
 class UserEditForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'image', ]
+        fields = ['username', 'first_name', 'last_name', 'email', 'image', 'address', 'instagram', 'facebook', ]

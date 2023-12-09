@@ -4,13 +4,21 @@
         <a href="{% url 'languages:index' %}"><img src="{% static 'image/Astro-Logo.png' %}" class="logo-image"></a>
     </div>
     <nav>
-        <ul>
+        <ul style="margin-bottom: 5px;">
             <li><a href="{% url 'languages:index' %}">Engineering Manager</a></li>
             <li><a href="{% url 'languages:categories' %}">Languages</a></li>
             <li><a href="{% url 'opinions:opinions' %}">Opinions</a></li>
             {% if user.is_authenticated %}
-                Hello, {{ user.username }}.
-                <li><a href="{% url 'users:my_account' %}">My Account</a></li>
+                <li style="margin-top: -15px;">
+                    <a href="{% url 'users:my_account' %}" style="display: flex; align-items: center;">
+                        Hello, {{ user.username }}
+                        {% if not user.image %}
+                            <img src="{% static 'image/user_account/default_avatar.jpg' %}" width="50px" height="50px" style="border-radius: 50px; margin-left: 10px;">
+                        {% else %}
+                            <img src="{{ user.image.url }}" width="50px" height="50px" style="border-radius: 50px; margin-left: 10px;">
+                        {% endif %}
+                    </a>
+                </li>
                 <li><a href="{% url 'users:logout' %}">LogOut</a></li>
             {% else %}
                 <li><a href="{% url 'users:login' %}">Login</a></li>
