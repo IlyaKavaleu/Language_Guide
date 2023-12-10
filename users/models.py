@@ -10,8 +10,21 @@ class User(AbstractUser):
     address = models.CharField(max_length=200, blank=False, null=False)
     instagram = models.CharField(max_length=100, blank=False, null=False)
     facebook = models.CharField(max_length=100, blank=False, null=False)
+    linkedin = models.CharField(max_length=100, blank=False, null=False)
     country = models.CharField(max_length=100, blank=False, null=False)
     city = models.CharField(max_length=100, blank=False, null=False)
-    person_gender = models.IntegerField(choices=[(1, 'MAN'), (2, 'WOMAN')])
     age = models.IntegerField(null=True, blank=True)
-    family_status = models.IntegerField(choices=[(1, 'Married'), (2, 'Not married')])
+    status_private_user_info = models.CharField(max_length=200)
+
+    PERSON_STATUS_CHOICES = [
+        ('Му', 'MAN'),
+        ('WOMAN', 'WOMAN'),
+    ]
+    person_gender = models.CharField(max_length=20, choices=PERSON_STATUS_CHOICES, null=False, blank=False)
+
+    FAMILY_STATUS_CHOICES = [
+        ('married', 'Married'),
+        ('not married', 'Not married'),
+    ]
+    family_status = models.CharField(max_length=20, choices=FAMILY_STATUS_CHOICES, null=False, blank=False)
+

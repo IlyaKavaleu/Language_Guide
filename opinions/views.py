@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-
 from opinions.forms import OpinionForm
 from opinions.models import Opinion
 from users.models import User
