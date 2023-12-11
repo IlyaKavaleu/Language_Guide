@@ -48,8 +48,8 @@ body{background:url(https://bootstraptema.ru/images/bg/bg-1.png)}
 
 
   <div class="actions">
-                    <a href="{% url 'users:edit_account' %}"><button class="button">Изменить профиль</button></a>
-                </div>
+    <a href="{% url 'users:edit_account' %}"><button class="button">Изменить профиль</button></a>
+  </div>
 
 <div class="container">
 <div id="main">
@@ -78,7 +78,7 @@ body{background:url(https://bootstraptema.ru/images/bg/bg-1.png)}
  <p class="sosmed-author">
  <a href="{{ full_address_instagram }}"><i class="fa fa-instagram" title="Instagram"></i></a>
  <a href="{{ full_address_facebook }}"><i class="fa fa-facebook" title="Facebook"></i></a>
- <a href="#"><i class="fa fa-google-plus" title="Google Plus"></i></a>
+ <a href="{{ full_address_email }}"><i class="fa fa-envelope" title="Google Plus"></i></a>
  <a href="{{ full_address_linkedin }}"><i class="fa fa-linkedin" title="Linkedin"></i></a>
  </p>
  </div>

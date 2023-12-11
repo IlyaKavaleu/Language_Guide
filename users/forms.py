@@ -16,6 +16,11 @@ class ExtendedUserCreationForm(UserCreationForm):
 
 
 class UserEditForm(UserChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.help_text = None
+
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'image',
@@ -27,4 +32,5 @@ class UserEditForm(UserChangeForm):
             'family_status': forms.Select(
                 choices=[{'Married', 'Married'}, {'Not married', 'Not married'}]),
         }
+        exclude = ['password1', 'password2', ]
 

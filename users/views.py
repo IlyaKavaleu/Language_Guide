@@ -1,6 +1,5 @@
 from django.urls import reverse
 from programming_guide.settings import DEFAULT_FROM_EMAIL
-
 from basket.models import Basket
 from programming_guide.settings import AUTH_USER_MODEL
 from django.shortcuts import render, redirect
@@ -12,7 +11,7 @@ from django.core.mail import send_mail
 
 
 def send_email(subject, message, recipient_list):
-    send_mail(subject, message, 'kavaleuilia@gmail.com', recipient_list)
+    send_mail(subject, message, DEFAULT_FROM_EMAIL, recipient_list)
 
 
 def register(request):
@@ -33,7 +32,6 @@ def register(request):
     return render(request, 'registration/register.html', context)
 
 
-
 def get_inst(request):
     instagram_username = request.user.instagram if request.user.instagram else None
     if instagram_username:
@@ -46,7 +44,6 @@ def get_inst(request):
 
 def get_facebook(request):
     facebook_username = request.user.facebook if request.user.facebook else None
-    # name = ''.join(facebook_username).replace(' ', '.').lower()
     if facebook_username:
         main_address = 'https://www.facebook.com/'
         full_address = main_address + facebook_username + '/'
@@ -55,9 +52,18 @@ def get_facebook(request):
     return full_address
 
 
+def get_email(request):
+    email_username = request.user.email if request.user.email else None
+    if email_username:
+        main_address = 'https://mail.google.com/mail/'
+        full_address = main_address + email_username + '/0/#inbox'
+    else:
+        full_address = None
+    return full_address
+
+
 def get_linkedin(request):
     linkedin_username = request.user.linkedin if request.user.linkedin else None
-    # name = ''.join(facebook_username).replace(' ', '.').lower()
     if linkedin_username:
         main_address = 'https://www.linkedin.com/in/'
         full_address = main_address + linkedin_username + '/'
@@ -72,10 +78,12 @@ def account(request):
     full_address_instagram = get_inst(request)
     full_address_facebook = get_facebook(request)
     full_address_linkedin = get_linkedin(request)
+    full_address_email = get_email(request)
     baskets = Basket.objects.filter(user=user)
     context = {'user': user, 'email': email, 'baskets': baskets,
                'full_address_instagram': full_address_instagram,
                'full_address_facebook': full_address_facebook,
+               'full_address_email': full_address_email,
                'full_address_linkedin': full_address_linkedin,
                }
     return render(request, 'registration/account.html', context)

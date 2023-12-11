@@ -1,15 +1,102 @@
 {% extends 'languages/base.html' %}
 {% load static %}
 {% block content %}
-    <div style="text-align: center;">
+    <style>
+        /* styles.css */
+        #edit-account-form {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f8f8f8;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #edit-account-form form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #edit-account-form label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #edit-account-form input,
+        #edit-account-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #edit-account-form button {
+            width: 50%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #edit-account-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <div id="edit-account-form">
         <form action="{% url 'users:edit_account' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+
+            <label for="username">Username:</label>
+            {{ form.username }}
+
+            <label for="first_name">First Name:</label>
+            {{ form.first_name }}
+
+            <label for="last_name">Last Name:</label>
+            {{ form.last_name }}
+
+            <label for="email">Email:</label>
+            {{ form.email }}
+
+            <label for="image">Profile Image:</label>
+            {{ form.image }}
+
+            <label for="address">Address:</label>
+            {{ form.address }}
+
+            <label for="country">Country:</label>
+            {{ form.country }}
+
+            <label for="city">City:</label>
+            {{ form.city }}
+
+            <label for="person_gender">Gender:</label>
+            {{ form.person_gender }}
+
+            <label for="age">Age:</label>
+            {{ form.age }}
+
+            <label for="family_status">Family Status:</label>
+            {{ form.family_status }}
+
+            <label for="instagram">Instagram:</label>
+            {{ form.instagram }}
+
+            <label for="facebook">Facebook:</label>
+            {{ form.facebook }}
+
+            <label for="linkedin">LinkedIn:</label>
+            {{ form.linkedin }}
+
             <button class="btn btn-button">Save</button>
         </form>
     </div>
-<br>
-<br>
-<br>
-<br>
-{% endblock content%}
+{% endblock content %}
