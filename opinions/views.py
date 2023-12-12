@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from opinions.forms import OpinionForm
 from opinions.models import Opinion
@@ -27,5 +28,9 @@ def add_opinion(request):
 
 def delete_opinion(request, opinion_id):
     opinion = Opinion.objects.get(id=opinion_id)
-    opinion.delete()
+    if request.user == opinion.user:
+        opinion.delete()
+        messages.success(request, 'Отзыв успешно удален.')
+    else:
+        messages.error(request, 'У вас нет прав для удаления этого отзыва.')
     return redirect('opinions:opinions')

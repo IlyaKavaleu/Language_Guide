@@ -22,11 +22,11 @@ body{background:url(https://bootstraptema.ru/images/bg/bg-1.png)}
  border-bottom: 4px solid #ddd;
 }
 #real-estates-detail #author img {
- -webkit-border-radius: 100%;
- -moz-border-radius: 100%;
- -ms-border-radius: 100%;
- -o-border-radius: 100%;
- border-radius: 100%;
+ -webkit-border-radius: 80%;
+ -moz-border-radius: 80%;
+ -ms-border-radius: 80%;
+ -o-border-radius: 80%;
+ border-radius: 80%;
  border: 5px solid #ecf0f1;
  margin-bottom: 10px;
 }
@@ -45,16 +45,8 @@ body{background:url(https://bootstraptema.ru/images/bg/bg-1.png)}
  height: 450px;
 }
 </style>
-
-
-  <div class="actions">
-    <a href="{% url 'users:edit_account' %}"><button class="button">Изменить профиль</button></a>
-  </div>
-
 <div class="container">
-<div id="main">
-
-
+<div id="main" style="margin-top: -50px;">
  <div class="row" id="real-estates-detail">
  <div class="col-lg-4 col-md-4 col-xs-12">
  <div class="panel panel-default">
@@ -67,24 +59,28 @@ body{background:url(https://bootstraptema.ru/images/bg/bg-1.png)}
  </div>
  <div class="panel-body">
  <div class="text-center" id="author">
- {% if not user.image %} 
+ {% if not user.image %}
    <img src="{% static 'image/user_account/default_avatar.jpg' %}" width="200px" height="200px">
  {% else %}
    <img src="{{ user.image.url }}" width="200px" height="200px">
  {% endif %}
  <h3>{{ user.first_name }} {{ user.last_name }}</h3>
  <small class="label label-warning">{{ country }}</small>
- <p>Я простой беларусский пацан и мне всё по барабану.</p>
+ <p>Я простой пацан</p>
  <p class="sosmed-author">
  <a href="{{ full_address_instagram }}"><i class="fa fa-instagram" title="Instagram"></i></a>
  <a href="{{ full_address_facebook }}"><i class="fa fa-facebook" title="Facebook"></i></a>
  <a href="{{ full_address_email }}"><i class="fa fa-envelope" title="Google Plus"></i></a>
  <a href="{{ full_address_linkedin }}"><i class="fa fa-linkedin" title="Linkedin"></i></a>
+   <div class="actions">
+    <a href="{% url 'users:edit_account' %}"><button class="button">Изменить профиль</button></a>
+  </div>
  </p>
  </div>
  </div>
  </div>
  </div>
+
  <div class="col-lg-8 col-md-8 col-xs-12">
  <div class="panel">
  <div class="panel-body">
@@ -148,9 +144,7 @@ body{background:url(https://bootstraptema.ru/images/bg/bg-1.png)}
  </div>
  </div>
 </div>
-
-</div><!-- /.main -->
-</div><!-- /.container -->
+</div>
 {% endblock content %}
 
 

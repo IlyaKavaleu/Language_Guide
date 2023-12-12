@@ -1,7 +1,9 @@
+from django.core import paginator
+from django.core.paginator import PageNotAnInteger
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from comments.forms import CommentForm
 from comments.models import Comments
 from languages import forms
@@ -13,8 +15,18 @@ def index(request):
 
 
 def categories(request):
-    categories = Category.objects.all()
-    context = {'categories': categories}
+    categories_list = Category.objects.all()
+    categories_per_page = 9
+    paginator = Paginator(categories_list, categories_per_page)
+    page = request.GET.get('page')
+    try:
+        categories_page = paginator.page(page)
+    except PageNotAnInteger:
+        categories_page = paginator.page(1)
+    except EmptyPage:
+        categories_page = paginator.page(paginator.num_pages)
+
+    context = {'categories_page': categories_page}
     return render(request, 'languages/categories.html', context)
 
 

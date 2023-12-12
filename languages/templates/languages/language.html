@@ -145,9 +145,10 @@
       No image available
     {% endif %}
   </div>
-
+  {% if user.is_superuser or user.is_staff %}
     <a href="{% url 'languages:edit_language' language.id %}" class="btn-styles">Edit language</a>
     <a href="{% url 'languages:delete_language' language.id %}" class="btn-styles">Delete language</a>
+  {% endif %}
  <div class="opinion-block">
      <h2 style="text-align: center;">Комментарии к уроку</h2>
     {% for comment in comments %}

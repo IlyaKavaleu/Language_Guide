@@ -1,5 +1,5 @@
 {% load static %}
-
+{% if user.is_superuser or user.is_staff %}
 <style>
     body {
         margin: 0;
@@ -131,3 +131,5 @@
         document.getElementById('selectedCategoryId').value = selectedCategory;
     }
 </script>
+{% else %}
+{% endif %}

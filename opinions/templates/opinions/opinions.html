@@ -178,11 +178,14 @@
                     </div>
                   {% endif %}
                 <div class="delete-button-container">
-                  <a href="{% url 'opinions:delete_opinion' opinion.id %}">
-                    <p class="delete-button">Удалить</p>
-                  </a>
+                  <form method="post" action="{% url 'opinions:delete_opinion' opinion.id %}">
+                      {% csrf_token %}
+                      <button type="submit" class="delete-button" {% if user != opinion.user %}disabled{% endif %}>
+                          Удалить
+                      </button>
+                  </form>
                 </div>
-              </div>
+            </div>
           </div>
         {% endfor %}
       </div>

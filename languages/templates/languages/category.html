@@ -142,6 +142,7 @@
         <br>
         <br>
         <br>
+        {% if user.is_superuser or user.is_staff %}
         <div class="dropdown">
             <button class="dropbtn">Настройки</button>
             <div class="dropdown-content">
@@ -151,6 +152,7 @@
                 <a href="{% url 'languages:categories' %}">Back</a>
             </div>
         </div>
+        {% endif %}
     </div>
 </body>
 {% endblock content %}

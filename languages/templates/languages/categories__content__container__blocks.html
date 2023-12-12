@@ -13,7 +13,7 @@
 
 <div class="content-container">
     <div class="container">
-        {% for category in categories %}
+        {% for category in categories_page %}
             <div class="block">
                 <a href="{% url 'languages:category' category.id %}" class="button">
                     <h3>{{ category.name }}</h3>
@@ -38,15 +38,4 @@
             </div>
         {% endfor %}
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 </div>
