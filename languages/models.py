@@ -40,4 +40,4 @@ class Language(models.Model):
     def __str__(self):
         """Return a string representation of the name
         for in the admin panel"""
-        return self.name
+        return str(self.name)

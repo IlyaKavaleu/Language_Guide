@@ -180,7 +180,7 @@
                 <div class="delete-button-container">
                   <form method="post" action="{% url 'opinions:delete_opinion' opinion.id %}">
                       {% csrf_token %}
-                      <button type="submit" class="delete-button" {% if user != opinion.user %}disabled{% endif %}>
+                      <button type="submit" class="delete-button">
                           Удалить
                       </button>
                   </form>

@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
+from programming_guide.settings import AUTH_USER_MODEL
 from languages.models import Language
+from django.contrib.admin import ModelAdmin
 
 
 class Comments(models.Model):
@@ -15,4 +16,5 @@ class Comments(models.Model):
         verbose_name_plural = 'Comments'
 
     def __str__(self):
-        return f'user [{self.user}] - {self.text}'
+        return f'{self.user}, {self.text}'
+

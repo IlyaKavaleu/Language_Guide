@@ -1,3 +1,4 @@
+from django.contrib.admin import ModelAdmin
 from django.db import models
 
 from languages.models import Category
@@ -9,4 +10,6 @@ class Basket(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'Basket for {self.user}'
+        return f'Basket {self.user}'
+
+
