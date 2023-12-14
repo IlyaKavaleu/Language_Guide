@@ -1,32 +1,14 @@
 body {
-    background-color: black;
     color: white;
     margin: 0;
 }
 
 
-@keyframes changeBackground {
-    0% { background-color: dark; }
-    25% { background-color: orange; }
-    50% { background-color: dark; }
-    75% { background-color: orange; }
-    100% { background-image: dark; }
-}
-
-
-body {
-    animation: changeBackground 20s infinite; /* Задайте время анимации и количество картинок */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-footer {
-    background-color: #333;
+.footer {
+    background-color: rgba(0, 0, 0, 0.5); color: white; padding: 20px;
     color: white;
     padding: 10px;
 }
-
 
 
 @keyframes blinkAndScale {
