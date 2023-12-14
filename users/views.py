@@ -102,3 +102,7 @@ def edit_account(request):
     return render(request, 'registration/edit_account.html', context)
 
 
+def list_users(request):
+    users = User.objects.all()
+    context = {'users': users}
+    return render(request, 'registration/list_users.html', context)

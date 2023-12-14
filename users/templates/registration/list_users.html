@@ -1,0 +1,44 @@
+{% extends 'languages/base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-image: url('/static/image/super_font.jpg');
+            font-family: Arial, sans-serif; /* Замените на предпочтительный шрифт */
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333; /* Цвет заголовка */
+        }
+
+        .user-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .user-item {
+            background-color: #f5f5f5; /* Цвет фона элемента списка */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px; /* Скругленные углы */
+        }
+    </style>
+</head>
+<body>
+    <h1>List of Users</h1>
+    <ul class="user-list">
+        {% for user in users %}
+            <a href="{% url 'chat:chat_room' %}"><li class="user-item">{{ user }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+{% endblock content %}

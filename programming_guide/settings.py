@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'comments',
     'basket',
     'opinions',
+    'chat',
 ]
 
 MIDDLEWARE = [

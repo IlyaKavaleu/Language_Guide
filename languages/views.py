@@ -30,11 +30,26 @@ def categories(request):
     return render(request, 'languages/categories.html', context)
 
 
+def all_languages(request):
+    languages_list = Language.objects.all().order_by('-created')
+    languages_per_page = 3
+    paginator = Paginator(languages_list, languages_per_page)
+    page = request.GET.get('page')
+    try:
+        languages_page = paginator.page(page)
+    except PageNotAnInteger:
+        languages_page = paginator.page(1)
+    except EmptyPage:
+        languages_page = paginator.page(paginator.num_pages)
+    list_languages = Language.objects.all()
+    context = {'languages_page': languages_page}
+    return render(request, 'languages/all_languages.html', context)
+
+
 def category(request, category_id):
     category = Category.objects.get(id=category_id)
-    languages = Language.objects.all().filter(category=category).order_by('created')
     category.increment_views()
-    context = {'category': category, 'languages': languages}
+    context = {'category': category}
     return render(request, 'languages/category.html', context)
 
 
@@ -73,7 +88,7 @@ def edit_category(request, category_id):
         form = forms.CategoryForm(request.POST, request.FILES, instance=category)
         if form.is_valid():
             form.save()
-            return redirect('languages:category', id=category.id)
+            return redirect('languages:category', category_id=category.id)
     context = {'category': category, 'form': form}
     return render(request, 'languages/edit_category.html', context)
 

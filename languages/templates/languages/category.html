@@ -1,5 +1,7 @@
 {% extends 'languages/base.html' %}
 {% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,9 +9,12 @@
     <meta charset="UTF-8">
     <title>{{ category.name }} Languages</title>
 </head>
-
-{% block content %}
 <style>
+    body, html {
+        margin: 0;
+        padding: 0;
+    }
+
     .btn-container {
         width: 250px;
         height: 250px;
@@ -30,22 +35,6 @@
         75% {
             transform: translateX(-5px) rotate(-5deg) scale(1.1);
         }
-    }
-
-    .dropdown {
-        position: absolute;
-        top: 170px;
-        right: 30px;
-        display: inline-block;
-    }
-
-    .dropbtn {
-        background-color: #3498db;
-        color: white;
-        padding: 10px;
-        font-size: 16px;
-        border-radius: 10px;
-        cursor: pointer;
     }
 
     .description-block {
@@ -87,12 +76,27 @@
         margin-top: 5px;
     }
 
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropbtn {
+        background-color: #3498db;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
     .dropdown-content {
+        text-align: center;
         display: none;
         position: absolute;
-        background-color: #f9f9f9;
-        min-width: 105px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        background-color: blue;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
     }
 
@@ -111,49 +115,128 @@
         display: block;
     }
 
-    .dropdown:hover .dropbtn {
-        background-color: #2980B9;
+    .pagination {
+        margin-top: 20px;
+        text-align: center;
     }
+
+    .step-links {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .step-links a {
+        color: #333;
+        text-decoration: none;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        margin-right: 5px;
+    }
+
+    .step-links a:hover {
+        background-color: #000000;
+    }
+
+    .current {
+        font-weight: bold;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        background-color: #007bff;
+        color: #fff;
+        margin-right: 5px;
+    }
+
+    .current:hover {
+        background-color: #007bff;
+    }
+
+    .step-links a:disabled,
+    .current:disabled {
+        color: #aaa;
+        pointer-events: none;
+    }
+
+    /* Опционально: стили для адаптивности */
+    @media (max-width: 768px) {
+        .step-links a,
+        .current {
+            display: block;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+    }
+        .button-container {
+            display: flex;
+            margin: 20px 0; /* Внешние отступы вокруг контейнера */
+            background-image: url('/static/image/super_font.jpg');
+            border-radius: 5px;
+        }
+
+        /* Стили для ссылки <a> внутри контейнера */
+        .button-container a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            margin: 0 15px; /* Внутренние отступы справа и слева */
+            transition: color 0.3s ease;
+        }
+
+        /* Стили для заголовка <h2> внутри ссылки */
+        .button-container a h2 {
+            font-size: 20px;
+            margin: 0; /* Убираем внутренние отступы заголовка */
+        }
+
+        /* Эффект при наведении на ссылку */
+        .button-container a:hover {
+            color: #0056b3;
+        }
+
+
 </style>
 
-<body style="background-image: url('static/image/super_font.jpg');">
-    <div style="text-align: center;">
-        <div id="caption" style="font-size: 38px; font-family: 'Source Code Pro', monospace; text-shadow: 10px 10px 10px black; margin-bottom: 20px; margin-top:20px;">
-            Добро пожаловать в базовый курс такого замечательного языка как {{ category.name }}!
+
+<body style="background-image: url('/static/image/super_font.jpg');">
+    <div style="text-align: center; color: white">
+        <div id="caption" style="margin-top: 20px;">
+            <h1>Добро пожаловать в базовый курс такого замечательного языка как {{ category.name }}!</h1>
+            {% if user.is_superuser or user.is_staff %}
+                 <div class="dropdown" style="position: fixed; top: 100px; right: 10px;">
+                    <button class="dropbtn" style="text-align: right;">Настройки</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'languages:edit_category' category.id %}">Edit</a>
+                        <a href="{% url 'languages:new_language' category.id %}">Add</a>
+                        <a href="{% url 'languages:categories' %}">Back</a>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         <img class="btn-container" src="{{ category.image.url }}" alt="{{ category.title }}">
-        <br>
-        <br>
         <div class="description-block">
-            {% for language in languages %}
-            <div class="language-block">
-                <a href="{% url 'languages:language' category.id language.id %}">
-                    <strong>{{ language.name }}</strong>
-                    {% if category.image %}
-                        <img src="{{ language.image.url }}" alt="{{ language.title }}">
-                    {% endif %}
+            <h1 style="color: black;">Что такое {{ category.name }}?</h1>
+            <p style="color: black;">{{ category.description }}</p>
+        </div>
+        <div class="description-block">
+            <div class="button-container">
+                <a href="{% url 'languages:all_languages' %}">
+                    <h2>Попробовать бесплатное обучение</h2>
                 </a>
             </div>
-            {% endfor %}
-            <p>{{ category.description }}</p>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        {% if user.is_superuser or user.is_staff %}
-        <div class="dropdown">
-            <button class="dropbtn">Настройки</button>
-            <div class="dropdown-content">
-                <a href="{% url 'languages:edit_category' category.id %}">Edit</a>
-<!--                <a href="{% url 'languages:delete_category' category.id %}">Delete</a>-->
-                <a href="{% url 'languages:new_language' category.id %}">Add</a>
-                <a href="{% url 'languages:categories' %}">Back</a>
+
+            <div class="button-container">
+                <a href="#">
+                    <h2>Попробовать платное обучение</h2>
+                </a>
             </div>
         </div>
-        {% endif %}
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
 </body>
-{% endblock content %}
 </html>
+{% endblock content %}

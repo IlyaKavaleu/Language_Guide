@@ -1,0 +1,103 @@
+{% extends 'languages/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-image: url('/static/image/super_font.jpg');
+            background-size: cover;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .description-block {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .language-block {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .language-block:hover {
+            transform: scale(1.1);
+        }
+
+        .language-block a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .language-block img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white; /* Добавляем белый фон для блока пагинации */
+            padding: 10px; /* Добавляем отступы вокруг пагинации */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-links a {
+            margin-right: 10px;
+            color: black;
+            text-decoration: none;
+        }
+
+        .current {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="description-block">
+        {% for language in languages_page %}
+        <div class="language-block">
+            <a href="{% url 'languages:language' language.category.id language.id %}">
+                <strong>{{ language.name }}</strong>
+                {% if language.category.image %}
+                    <img src="{{ language.image.url }}" alt="{{ language.title }}" width="100px" height="100px;">
+                {% endif %}
+            </a>
+        </div>
+        {% endfor %}
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if languages_page.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ languages_page.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ languages_page.number }} of {{ languages_page.paginator.num_pages }}.
+                </span>
+
+                {% if languages_page.has_next %}
+                    <a href="?page={{ languages_page.next_page_number }}">next</a>
+                    <a href="?page={{ languages_page.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+</body>
+</html>
+{% endblock content %}
