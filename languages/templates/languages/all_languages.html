@@ -7,6 +7,58 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+         .pagination {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .step-links {
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+            .step-links a {
+                color: #333;
+                text-decoration: none;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                margin-right: 5px;
+            }
+
+            .step-links a:hover {
+                background-color: #aaa
+            }
+
+            .current {
+                font-weight: bold;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                background-color: #007bff;
+                color: #fff;
+                margin-right: 5px;
+            }
+
+            .current:hover {
+                background-color: #007bff;
+            }
+
+            .step-links a:disabled,
+            .current:disabled {
+                color: #aaa;
+                pointer-events: none;
+            }
+
+            /* Опционально: стили для адаптивности */
+            @media (max-width: 768px) {
+                .step-links a,
+                .current {
+                    display: block;
+                    width: 100%;
+                    margin-bottom: 5px;
+                }
+            }
+
+
         body {
             background-image: url('/static/image/super_font.jpg');
             background-size: cover;
@@ -16,14 +68,15 @@
 
         .description-block {
             max-width: 800px;
-            margin: 0 auto;
+            max-height: 600px;
+            margin: -10px auto;
             padding: 20px;
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .language-block {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             padding: 10px;
             border: 1px solid #ccc;
             transition: transform 0.3s ease-in-out;
@@ -45,15 +98,17 @@
             margin-top: 10px;
         }
 
-        .pagination {
+       .pagination {
             margin-top: 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background-color: white; /* Добавляем белый фон для блока пагинации */
-            padding: 10px; /* Добавляем отступы вокруг пагинации */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: none;
         }
+
 
         .step-links a {
             margin-right: 10px;
@@ -97,7 +152,6 @@
             </span>
         </div>
     </div>
-
 </body>
 </html>
 {% endblock content %}

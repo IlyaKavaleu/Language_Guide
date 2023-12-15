@@ -31,7 +31,7 @@ def categories(request):
 
 
 def all_languages(request):
-    languages_list = Language.objects.all().order_by('-created')
+    languages_list = Language.objects.all().order_by('created')
     languages_per_page = 3
     paginator = Paginator(languages_list, languages_per_page)
     page = request.GET.get('page')
