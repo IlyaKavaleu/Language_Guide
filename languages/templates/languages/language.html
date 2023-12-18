@@ -133,12 +133,10 @@
     }
 
 </style>
-<body>
+<body style="background-image: url('/static/image/super_font.jpg');">
   <div class="description-block">
-    <div style="text-align: center; background-color: light;">
       <h2>{{ language.name }}</h2><br>
         {{ language.description }}
-    </div>
     {% if language.image %}
       <img src="{{ language.image.url }}" alt="{{ language.title }}" width="50px" height="50px">
     {% else %}
@@ -149,8 +147,8 @@
     <a href="{% url 'languages:edit_language' language.id %}" class="btn-styles">Edit language</a>
     <a href="{% url 'languages:delete_language' language.id %}" class="btn-styles">Delete language</a>
   {% endif %}
- <div class="opinion-block">
-     <h2 style="text-align: center;">Комментарии к уроку</h2>
+ <div class="opinion-block" style="background-color: white;">
+     <h2 style="text-align: center; color: black;">Комментарии к уроку</h2>
     {% for comment in comments %}
         <div class="comment">
             <h4 class="comment-user">user [{{ comment.user }}]</h4>

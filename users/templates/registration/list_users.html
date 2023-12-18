@@ -2,43 +2,32 @@
 {% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <head>
     <style>
-        body {
-            background-image: url('/static/image/super_font.jpg');
-            font-family: Arial, sans-serif; /* Замените на предпочтительный шрифт */
-            padding: 20px;
-        }
+      .container {
+        width: 100%;
+        margin: 0 auto;
+      }
 
-        h1 {
-            color: #333; /* Цвет заголовка */
-        }
-
-        .user-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .user-item {
-            background-color: #f5f5f5; /* Цвет фона элемента списка */
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px; /* Скругленные углы */
-        }
+      .block {
+        width: 30%;
+        box-sizing: border-box;
+        display: inline-block;
+        margin: 1%;
+        background-color: #f2f2f2;
+        padding: 20px;
+        text-align: center;
+      }
     </style>
-</head>
-<body>
-    <h1>List of Users</h1>
-    <ul class="user-list">
-        {% for user in users %}
-            <a href="{% url 'chat:chat_room' %}"><li class="user-item">{{ user }}</li>
-        {% endfor %}
-    </ul>
+  </head>
+<body style="background-image: url('/static/image/super_font.jpg');">
+  <div class="container">
+    <h1 style="color: white; text-align: center;">List of Users</h1>
+    {% for user in users %}
+      <div class="block">
+        {{ user.username }}
+      </div>
+    {% endfor %}
+  </div>
 </body>
-</html>
-{% endblock content %}
+{% endblock %}

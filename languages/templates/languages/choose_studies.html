@@ -1,0 +1,67 @@
+{% extends 'languages/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .description-block::before {
+        content: "";
+        display: block;
+        height: 20px; /* Высота блока выше */
+        margin-bottom: 20px; /* Расстояние между блоками */
+    }
+
+    .description-block {
+        width: 100%; /* Устанавливаем ширину блока на 100% */
+        max-width: 1000px;
+        height: 500px; /* Устанавливаем высоту блока */
+        max-height: 1000px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        text-align: center; /* Выравниваем текст по центру */
+        line-height: 1.5;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Центрируем содержимое блока по горизонтали */
+        align-items: center; /* Центрируем содержимое блока по вертикали */
+    }
+
+    .button-container {
+        margin: 10px; /* Добавляем отступ между кнопками */
+    }
+
+    .button-container a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var buttons = document.querySelectorAll(".button-container");
+
+        buttons.forEach(function (button, index) {
+            button.style.animation = "fadeInUp 0.5s ease " + index * 0.2 + "s";
+        });
+    });
+</script>
+<body style="background-image: url('/static/image/super_font.jpg');">
+    <div class="description-block" style="background-image: url('/static/image/mining-moon-nasa.jpg');">
+        <div class="button-container">
+            <a href="{% url 'languages:categories' %}">
+                <h2>Попробовать бесплатное обучение</h2>
+            </a>
+        </div>
+        <div class="button-container">
+            <a href="{% url 'paid_lessons:all_paid_lessons' %}">
+                <h2>Попробовать платное обучение</h2>
+            </a>
+        </div>
+    </div>
+</body>
+{% endblock content %}

@@ -10,9 +10,9 @@
 </head>
 <style>
     .pagination {
-    margin-top: 20px;
-    text-align: center;
-}
+        margin-top: 20px;
+        text-align: center;
+    }
 
 .step-links {
     display: inline-block;
@@ -72,7 +72,7 @@
                 {% include 'languages/categories__buttons__settings.html' %}
             {% endif %}
         </h1>
-        {% include 'languages/categories__content__container__blocks.html' %}  {# Здесь блоки категорий, которые в другом файле сюда добавляются и должны быть пропагинированы #}
+        {% include 'languages/categories__content__container__blocks.html' %}
         <div class="pagination">
             <span class="step-links">
                 {% if categories_page.has_previous %}

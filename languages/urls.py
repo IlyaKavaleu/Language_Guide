@@ -17,6 +17,7 @@ urlpatterns = [
     path('delete_all_categories/', views.delete_all_categories, name='delete_all_categories'),
     path('delete_all_languages/<int:language_id>', views.delete_all_languages, name='delete_all_languages'),
     path('delete_category/', views.delete_with_choose_category, name='delete_with_choose_category'),
-    path('all_languages/', views.all_languages, name='all_languages'),
+    path('all_languages/<int:category_id>/', views.all_languages, name='all_languages'),
+    path('choose_studies/', views.choose_studies, name='choose_studies'),
 ]
 

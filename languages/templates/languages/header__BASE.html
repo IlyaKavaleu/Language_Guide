@@ -114,8 +114,9 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: white; padding-left: 5px;">Your account<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'users:list_users' %}" style=" color: white; padding: 38px 38px;">Users</a></li>
-                        <li><a href="{% url 'languages:categories' %}" style=" color: white; padding: 38px 38px;">Languages</a></li>
+                        <li><a href="{% url 'chat:chat_room' %}" style=" color: white; padding: 38px 38px;">Chat</a></li>
+                        <li><a href="{% url 'users:list_users' %}" style=" color: white; padding: 38px 38px;">All Users</a></li>
+                        <li><a href="{% url 'languages:choose_studies' %}" style=" color: white; padding: 38px 38px;">Studies</a></li>
                         <li><a href="{% url 'opinions:opinions' %}" style=" color: white; padding: 38px 38px;">Opinions</a></li>
                     </ul>
                 </li>

@@ -1,0 +1,65 @@
+{% extends 'languages/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-image: url('/static/image/super_font.jpg');
+            font-family: Arial, sans-serif; /* Шрифт по умолчанию */
+            margin: 0; /* Убираем внешние отступы у body */
+            padding: 20px; /* Добавляем внутренние отступы для формы */
+        }
+
+        form {
+            max-width: 400px; /* Максимальная ширина формы */
+            margin: 0 auto; /* Центрируем форму по горизонтали */
+            background-color: #ffffff; /* Цвет фона формы */
+            padding: 20px; /* Внутренние отступы для формы */
+            border-radius: 8px; /* Закругляем углы формы */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень формы */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px; /* Отступ снизу метки */
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px; /* Внутренние отступы для текстовых полей */
+            margin-bottom: 16px; /* Отступ снизу текстовых полей */
+            box-sizing: border-box; /* Учитываем границы и отступы внутри ширины */
+        }
+
+        button {
+            background-color: #4CAF50; /* Цвет фона кнопки */
+            color: #ffffff; /* Цвет текста кнопки */
+            padding: 10px 15px; /* Внутренние отступы кнопки */
+            border: none; /* Убираем границу кнопки */
+            border-radius: 4px; /* Закругляем углы кнопки */
+            cursor: pointer; /* Изменяем курсор при наведении на кнопку */
+        }
+
+        button:hover {
+            background-color: #45a049; /* Цвет фона кнопки при наведении */
+        }
+    </style>
+</head>
+<body>
+    <form action="{% url 'paid_lessons:add_paid_lesson' request.user.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-button">Save</button>
+    </form>
+</body>
+</html>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock content %}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'basket',
     'opinions',
     'chat',
+    'paid_lessons',
 ]
 
 MIDDLEWARE = [

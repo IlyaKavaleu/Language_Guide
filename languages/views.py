@@ -30,8 +30,9 @@ def categories(request):
     return render(request, 'languages/categories.html', context)
 
 
-def all_languages(request):
-    languages_list = Language.objects.all().order_by('created')
+def all_languages(request, category_id):
+    category_id = Category.objects.get(id=category_id)
+    languages_list = Language.objects.filter(category=category_id).order_by('created')
     languages_per_page = 3
     paginator = Paginator(languages_list, languages_per_page)
     page = request.GET.get('page')
@@ -149,3 +150,7 @@ def delete_with_choose_category(request):
     except model.DoesNotExist:
         pass  # Обработка случая, когда категория не найдена
     return redirect('languages:categories')
+
+
+def choose_studies(request):
+    return render(request, 'languages/choose_studies.html')

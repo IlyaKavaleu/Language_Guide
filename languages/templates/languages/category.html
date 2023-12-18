@@ -173,26 +173,25 @@
         }
 
         /* Стили для ссылки <a> внутри контейнера */
-        .button-container a {
-            text-decoration: none;
-            color: #007bff;
+
+        .styled-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 16px;
             font-weight: bold;
-            margin: 0 15px; /* Внутренние отступы справа и слева */
-            transition: color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            border: 2px solid #2980b9;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
         }
 
-        /* Стили для заголовка <h2> внутри ссылки */
-        .button-container a h2 {
-            font-size: 20px;
-            margin: 0; /* Убираем внутренние отступы заголовка */
+        .styled-button:hover {
+            background-color: #2980b9;
         }
-
-        /* Эффект при наведении на ссылку */
-        .button-container a:hover {
-            color: #0056b3;
-        }
-
-
 </style>
 
 
@@ -215,20 +214,9 @@
         <div class="description-block">
             <h1 style="color: black;">Что такое {{ category.name }}?</h1>
             <p style="color: black;">{{ category.description }}</p>
+            <a href="{% url 'languages:all_languages' category.id %}" class="styled-button">Начать обучение</a>
         </div>
-        <div class="description-block">
-            <div class="button-container">
-                <a href="{% url 'languages:all_languages' %}">
-                    <h2>Попробовать бесплатное обучение</h2>
-                </a>
-            </div>
 
-            <div class="button-container">
-                <a href="#">
-                    <h2>Попробовать платное обучение</h2>
-                </a>
-            </div>
-        </div>
         <br>
         <br>
         <br>

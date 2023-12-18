@@ -1,0 +1,126 @@
+{% extends 'languages/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .chapter-container {
+            background-color: white;
+            width: 700px;
+            height: 400px;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px 20px;
+            margin: 20px auto;
+            background:
+            linear-gradient(to right, #ffffff 50%, transparent 50%),
+            url('/static/image/super_font.jpg');
+            background-size: 100% 100%;
+        }
+
+        .text-container {
+            flex: 1;
+            margin-right: 55px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: height 0.3s ease;
+        }
+
+        .video-container {
+            flex: 1;
+            margin-right: 15px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .read-more {
+            cursor: pointer;
+            color: blue;
+            display: block;
+            margin-top: 10px;
+        }
+        .modal-body {
+        word-wrap: break-word;
+    }
+    </style>
+</head>
+<body style="background-image: url('/static/image/super_font.jpg');">
+<div style="text-align: center;">
+    <h1 style="color: white;">Уроки по {{ chapters.first.lesson.title }}</h1>
+    {% for chapter in chapters %}
+        <div class="chapter-container" style="border: 1px solid black; box-shadow: 2px 2px 5px rgba(2, 2, 2, 2);">
+            <div class="text-container" id="textContainer{{ chapter.id }}">
+                <p style="color: black;">Название раздела: <strong>{{ chapter.title }}</strong></p>
+                <p style="color: black;">Описание: <span id="description{{ chapter.id }}">{{ chapter.description }}</span>
+                    {% if chapter.description|length > 50 %}
+                        <span class="read-more" onclick="toggleDescription({{ chapter.id }})">Читать далее</span>
+                    {% endif %}
+                </p>
+                <p style="color: black;">Время урока: <strong>{{ chapter.duration }}</strong></p>
+            </div>
+            <div class="video-container">
+                {% if chapter.video_url %}
+                    <p><strong style="color: black;">Урок</strong></p>
+                    <video width="100%" height="100%" controls style="border: 1px solid black;">
+                        <source src="{{ chapter.video_url.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% else %}
+                    <p>No video file associated with this chapter.</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+
+<div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 80%;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="descriptionModalLabel">Подробное описание</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="descriptionModalBody"></div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        function toggleDescription(chapterId) {
+            var description = document.getElementById('description' + chapterId).innerText;
+            document.getElementById('descriptionModalBody').innerText = description;
+            $('#descriptionModal').modal('show');
+        }
+    </script>
+</div>
+
+</body>
+</html>
+<br>
+<br>
+<br>
+<br>
+{% endblock content %}

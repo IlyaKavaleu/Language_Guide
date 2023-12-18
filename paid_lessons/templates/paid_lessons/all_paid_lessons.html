@@ -1,0 +1,34 @@
+{% extends 'languages/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-image: url('/static/image/super_font.jpg');">
+<div style="text-align: center;">
+    {% for paid_lesson in paid_lessons %}
+        <a href="{% url 'paid_lessons:show_lesson' paid_lesson.id %}">
+            <div style="background-color: white; padding: 20px; margin-bottom: 20px; display: inline-block;
+                padding: 10px 20px; margin-top: 30px; border-radius: 10px;">
+                <h2>{{ lesson.title }}</h2>
+                <p><strong>Description:</strong> {{ paid_lesson.description }}</p>
+                <p><strong>Price:</strong> ${{ paid_lesson.price }}</p>
+                <p><strong>Duration:</strong> {{ paid_lesson.duration }}</p>
+                <p><strong>Teacher: {{ paid_lesson.teacher.first_name }}</strong></p>
+                {% if paid_lesson.video_url %}
+                    <video width="320" height="240" controls>
+                        <source src="{{ lesson.video_url.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% else %}
+                    <p>No video file associated with this lesson.</p>
+                {% endif %}
+            </div>
+        </a>
+    {% endfor %}
+</div>
+</body>
+</html>
+{% endblock content %}
