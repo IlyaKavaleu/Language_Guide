@@ -1,0 +1,82 @@
+{% extends 'languages/base.html' %}
+
+{% block content %}
+
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+
+    <div style="margin-top: 20px;">
+        <strong>Please fill in your email address.</strong>
+    </div>
+
+    <div>
+        <div>
+            <h1>Checkout order</h1>
+        </div>
+        <div style="display: flex; justify-content: center;">
+
+            <div style="margin-right: 20px;">
+                <div style="background-color: #f0f0f0; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    padding: 20px; text-align: center; max-width: 400px;">
+                    <h4 style="color: #333;">К оплате</h4>
+                    <ul style="list-style: none; padding: 0; margin-top: 10px;">
+                        {% for paid_card in paid_cards %}
+                            <li style="border-bottom: 1px solid #ddd; padding: 10px 0;">
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; text-align: left;">
+                                    <div>
+                                        <h6 style="color: #333; margin: 0;">{{ paid_card.paid_lesson.title }}</h6>
+                                        <small style="color: #777;">{{ paid_card.paid_lesson.price }} руб.</small>
+                                    </div>
+                                    <span style="font-weight: bold; color: #555;">{{ paid_card.sum }} руб.</span>
+                                </div>
+
+                            </li>
+                        {% endfor %}
+
+                        <li style="padding: 10px 0;">
+                            <span style="font-weight: bold; color: #555;">Amount payable</span>
+                            <strong style="font-size: 20px; color: #333;">{{ paid_cards.price_all_products }} руб.</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <div style="background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; text-align: center; max-width: 400px;">
+                    <h4 style="color: #333;">Укажите данные и информацию о себе</h4>
+
+                    <form action="{% url 'orders:order_create' %}" method="post">
+
+                        {% csrf_token %}
+
+                        <div style="margin-top: 15px; display: flex; flex-direction: column; align-items: center;">
+
+                            <div style="margin-bottom: 15px; width: 100%;">
+                                <label for="{{ form.first_name.id_for_label }}" style="display: block; color: #555; margin-bottom: 5px;">Name</label>
+                                {{ form.first_name }}
+                            </div>
+
+                            <div style="margin-bottom: 15px; width: 100%;">
+                                <label for="{{ form.last_name.id_for_label }}" style="display: block; color: #555; margin-bottom: 5px;">Surname</label>
+                                {{ form.last_name }}
+                            </div>
+
+                            <div style="margin-bottom: 15px; width: 100%;">
+                                <label for="{{ form.email.id_for_label }}" style="display: block; color: #555; margin-bottom: 5px;">Email Address</label>
+                                {{ form.email }}
+                            </div>
+                        </div>
+
+                        <hr style="border: 0.5px solid #ddd; margin: 20px 0;">
+
+                        <button type="submit" style="background-color: #3498db; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Next</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

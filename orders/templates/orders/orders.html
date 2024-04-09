@@ -1,0 +1,90 @@
+{% extends 'languages/base.html' %}
+{% block content %}
+<style>
+    /* Добавленные стили для таблицы и кнопки */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered thead th, .table-bordered thead td {
+    border-bottom-width: 2px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+</style>
+    <section>
+        <div class="container mt-5">
+            <div class="text-center mb-5">
+                <h1 class="display-4">Заказы</h1>
+                <div class="orders mt-4">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Статус</th>
+                                    <th scope="col">Создан</th>
+                                    <th scope="col">Итого</th>
+                                    <th scope="col">Действие</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in object_list %}
+                                    <tr>
+                                        <th scope="row">{{ order.id }}</th>
+                                        <td>{{ order.get_status_display }}</td>
+                                        <td>{{ order.created }}</td>
+                                        <td>{{ order.paid_card_history.total_sum }} PLN</td>
+                                        <td>
+                                            <a href="{% url 'orders:order' order.id %}" class="btn btn-primary">Просмотреть</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'languages/base.html' %}
+{% block content %}
+<style>
+    /* Добавленные стили для таблицы и параграфа */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered thead th, .table-bordered thead td {
+    border-bottom-width: 2px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.float-right {
+    float: right !important;
+}
+
+.mt-3 {
+    margin-top: 1rem !important;
+}
+
+</style>
+    <section>
+        <div class="container mt-5">
+            <div class="text-center mb-5">
+                <h1 class="display-4">Order #{{ object.id }}</h1>
+                <div class="orders mt-4">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Название</th>
+                                    <th scope="col">Кол-во</th>
+                                    <th scope="col">Цена</th>
+                                    <th scope="col">Сумма</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for purchased_item in object.paid_card_history.purchased_items %}
+                                    <tr>
+                                        <th scope="row">
+                                            {{ purchased_item.paid_lesson_name }}
+                                        </th>
+                                        <td>{{ purchased_item.quantity }}</td>
+                                        <td>{{ purchased_item.price }} PLN</td>
+                                        <td>{{ purchased_item.sum }} PLN</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="float-right h4 mt-3"><strong>Итого {{ object.paid_card_history.total_sum }} PLN</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
